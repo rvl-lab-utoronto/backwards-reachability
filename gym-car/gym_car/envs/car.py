@@ -15,20 +15,15 @@ class Car(object):
         self.env = env
 
         # control (go from 1 to -1?)
-        self.theta = 0.0
-        self.dt = 1
+        self.theta = 0.0  # angle of steering wheel
+        self.dt = 1  # velocity or timestep
 
         # start somewhere
         self.x = 0.0
         self.y = 0.0
 
-        # aspire to go somewhere (dream big)
-        # maybe give target to enviroment? not sure
-        # self.x_target = 10.0
-        # self.y_target = 10.0
-
         # possibly setup random obstacles
-        # not sure how best to do this
+        # not sure how best to do this right now
 
         # environment bounds
         self.x_lower = 0.0
@@ -40,28 +35,30 @@ class Car(object):
     # def step(self, control, speed):
     def step(self, action):
 
+        # compute x and y changes
         dx = cos(self.theta)
         dy = sin(self.theta)
 
-        # print("dfafsd")
-        # print(action)
+        # compute new steering
+        # I use the sigmoid function to trim
         print("Action: ", action)
         dtheta = float(sigmoid(torch.tensor(action)))
         print("dtheta: ", dtheta)
 
+        # update state of self
         self.x += self.dt*dx
         self.y += self.dt*dy
         self.theta += self.dt*dtheta
 
         return self.x, self.y, self.theta
 
+    # literally the same as forwards except that it subtracts the values instead
+    # of adding them
     def step_backwards(self, action):
 
         dx = cos(self.theta)
         dy = sin(self.theta)
 
-        # print("dfafsd")
-        # print(action)
         print("Action: ", action)
         dtheta = float(sigmoid(torch.tensor(action)))
         print("dtheta: ", dtheta)
