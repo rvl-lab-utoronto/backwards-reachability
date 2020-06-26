@@ -3,3 +3,7 @@ scipy
 pandas
 matplotlib
 scikit-learn
+torch
+gym
+math 
+random

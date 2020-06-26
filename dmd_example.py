@@ -54,12 +54,17 @@ print("V: " + str(V))
 plt.plot(S)
 plt.ylabel('some numbers')
 plt.yscale('log')
-plt.show()  # seems to match the video so far
+# plt.show()  # seems to match the video so far
 
 
 # im sure theres a cleaner way to do this lol
-Atilde = np.matmul(U.T, np.matmul(X2, np.matmul(V, np.linalg.inv(S))))
+Atilde = U.T @ X2 @ V @ np.linalg.inv(S)
 
-print("\n\n\n haha \n\n\n")
-print(U)
-print(Atilde)
+W, eigs = np.linalg.eig(Atilde)
+
+
+print("\n\n\n eigen stuff \n\n\n")
+print("W: " + str(W))
+print("eigs: " + str(eigs.shape))
+
+Phi = X2 @ V @ np.linalg.inv(S) @ W
