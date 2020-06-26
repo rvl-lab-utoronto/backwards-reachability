@@ -1,4 +1,5 @@
 import gym
+import math
 from car import Car
 from gym import error, spaces, utils
 from gym.utils import seeding
@@ -27,6 +28,11 @@ class CarEnv(gym.Env):
         # add a dubins car to the env
         self.Car = Car(self)
 
+    def get_angle(self):
+        angle = math.atan2(self.y_target - self.Car.y,
+                           self.x_target - self.Car.x)
+        return angle
+
     def get_dist(self):
         # calculate the euclidean distance from the car to the target
         dist = distance.euclidean(
@@ -41,7 +47,10 @@ class CarEnv(gym.Env):
     def get_observation(self):
         # return the cars state, and the target
         car_info = self.Car.get_info()
-        return car_info, self.x_target, self.y_target
+        dist = self.get_dist()
+        angle = self.get_angle()
+        print("afasfs", dist)
+        return car_info, self.x_target, self.y_target, dist, angle
 
     def obs_toString(self):
         # For debugging, prints out info about the state nicely

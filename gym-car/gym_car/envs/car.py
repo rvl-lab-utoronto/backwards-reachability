@@ -42,7 +42,8 @@ class Car(object):
         # compute new steering
         # I use the sigmoid function to trim
         print("Action: ", action)
-        dtheta = float(sigmoid(torch.tensor(action)))
+        # dtheta = float(sigmoid(torch.tensor(action)))
+        dtheta = action
         print("dtheta: ", dtheta)
 
         # update state of self
@@ -60,7 +61,8 @@ class Car(object):
         dy = sin(self.theta)
 
         print("Action: ", action)
-        dtheta = float(sigmoid(torch.tensor(action)))
+        # dtheta = float(sigmoid(torch.tensor(action)))
+        dtheta = action
         print("dtheta: ", dtheta)
 
         self.x -= self.dt*dx
