@@ -1,5 +1,6 @@
 import gym
 import math
+import random
 from car import Car
 from gym import error, spaces, utils
 from gym.utils import seeding
@@ -19,8 +20,8 @@ class CarEnv(gym.Env):
         self.y_upper = 100
 
         # goal
-        self.x_target = 50
-        self.y_target = 70
+        self.x_target = random.randint(0, self.x_upper)
+        self.y_target = random.randint(0, self.y_upper)
 
         # log of actions, needed to go backwards
         self.action_history = []

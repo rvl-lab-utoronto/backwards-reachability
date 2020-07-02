@@ -2,6 +2,7 @@ from car_env import CarEnv
 from car import Car
 import random
 import math
+import pygame
 
 
 # This is basically the policy we're going to use to choose actions
@@ -47,17 +48,3 @@ class Agent:
         reward = env.step(action)
         # print("Reward: ", reward)
         self.total_reward += reward
-
-
-if __name__ == "__main__":
-    env = CarEnv()
-    agent = Agent()
-
-    while not env.is_done():
-        agent.step(env)
-        print()
-
-    # env.action_history is a log of all the moves made, and we can use it to go
-    # backwards in the dynamics
-    print(env.action_history)
-    print("Total reward got: %.4f" % agent.total_reward)

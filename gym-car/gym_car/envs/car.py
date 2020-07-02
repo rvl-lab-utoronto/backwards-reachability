@@ -1,4 +1,5 @@
 import torch
+import random
 from torch import sigmoid
 from math import sin, cos
 
@@ -19,8 +20,8 @@ class Car(object):
         self.dt = 1  # velocity or timestep
 
         # start somewhere
-        self.x = 0.0
-        self.y = 0.0
+        self.x = random.randint(0, env.x_upper)
+        self.y = random.randint(0, env.y_upper)
 
         # possibly setup random obstacles
         # not sure how best to do this right now
