@@ -1,6 +1,6 @@
-import torch
+#import torch
 import random
-from torch import sigmoid
+#from torch import sigmoid
 from math import sin, cos
 
 
