@@ -9,7 +9,7 @@ import pygame
 def draw_car(screen, car_info):
     x, y = car_info[0], car_info[1]
     size = 5
-    color = (0, 128, 255)
+    color = (0, 128, 101)
     # arrow = pygame.Surface((size, size))
     # arrow.fill(color)
     # pygame.draw.line(arrow, color, (0, 0), (25, 25))
