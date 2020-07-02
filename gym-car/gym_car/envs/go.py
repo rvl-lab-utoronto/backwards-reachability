@@ -9,7 +9,7 @@ import pygame
 def draw_car(screen, car_info):
     x, y = car_info[0], car_info[1]
     size = 5
-    color = (0, 128, 255)
+    color = (0, 128, 222)
     # arrow = pygame.Surface((size, size))
     # arrow.fill(color)
     # pygame.draw.line(arrow, color, (0, 0), (25, 25))
@@ -50,13 +50,13 @@ if __name__ == "__main__":
 
     while not env.is_done():
         agent.step(env)
-        screen.fill((0, 0, 0)) # erase screen
+        screen.fill((0, 0, 0))  # erase screen
         draw_state(screen, env)
         for event in pygame.event.get():
             pass
 
-        pygame.display.flip() # refresh screen
-        clock.tick(60) # 60 times/sec
+        pygame.display.flip()  # refresh screen
+        clock.tick(60)  # 60 times/sec
         print()
 
     # env.action_history is a log of all the moves made, and we can use it to go
