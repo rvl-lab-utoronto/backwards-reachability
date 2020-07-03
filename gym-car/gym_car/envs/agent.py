@@ -19,7 +19,7 @@ class Agent:
 
     def cs_policy(self, current_obs):
         hyp = current_obs[3]
-        print("gggg", hyp)
+        print("hyp", hyp)
         ideal_theta = current_obs[4]
         curr_theta = current_obs[0][2]
         print("curr_theta: ", curr_theta)
