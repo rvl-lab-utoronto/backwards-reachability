@@ -1,3 +1,4 @@
 ThirdPartyResources/CYLINDER_ALL.mat
 *.pyc
 .vscode
+gym-car/gym_car/envs/__pycache__/*
