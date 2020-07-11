@@ -3,14 +3,15 @@
 # FOR VISUAL PURPOSES ONLY
 
 
-class Env(self):
-    self.state = [0, 0, 0, 0]
-    self.is_done = False
+class Env:
+    def __init__(self):
+        self.state = [0, 0, 0, 0]
+        self.is_done = False
 
     def get_observation(self):
         return self.state, self.is_done
 
-    def check_if_done():
+    def check_if_done(self):
         end_condition = False
         if end_condition:
             return True
@@ -29,7 +30,7 @@ class Env(self):
         pass
 
 
-class Agent(self):
+class Agent:
 
     def policy(self, observation):
         if observation == [0, 0, 0, 0]:
@@ -43,10 +44,9 @@ env = Env()
 agent = Agent()
 total_reward = 0
 
-while not env.is_done():
+while not env.is_done:
     obs = env.get_observation()
     action = agent.policy(obs)
     reward = env.step(action)
     total_reward += reward
-
-print(total_reward)
+    print(total_reward)
