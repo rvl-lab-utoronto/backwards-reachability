@@ -1,7 +1,7 @@
 #import torch
 import random
 #from torch import sigmoid
-from math import sin, cos
+from math import sin, cos, tan, pi
 
 
 class Car(object):
@@ -18,6 +18,9 @@ class Car(object):
         # control (go from 1 to -1?)
         self.theta = 0.0  # angle of steering wheel
         self.dt = 1  # velocity or timestep
+        self.max_turn_radius = pi/3
+        self.frame_length = 20
+        self.speed = 1
 
         # start somewhere
         self.x = random.randint(0, env.x_upper)
@@ -36,15 +39,22 @@ class Car(object):
     # def step(self, control, speed):
     def step(self, action):
 
+        # if abs(self.theta + action) > self.min_turn_radius:
+        #     dtheta
+
         # compute x and y changes
         dx = cos(self.theta)
         dy = sin(self.theta)
 
-        # compute new steering
-        # I use the sigmoid function to trim
         print("Action: ", action)
-        # dtheta = float(sigmoid(torch.tensor(action)))
-        dtheta = action
+
+        # compute new steering
+        dtheta = (self.speed/self.frame_length) * tan(action)
+
+        # trim turn if its more than the car can handle
+        if abs(self.theta + self.dt*dtheta) > self.max_turn_radius:
+            dtheta = self.max_turn_radius - self.theta
+
         print("dtheta: ", dtheta)
 
         # update state of self
