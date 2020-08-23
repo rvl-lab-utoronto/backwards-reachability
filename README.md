@@ -1,2 +1,2 @@
 # backwards-reachability
-Using (backwards) reachability analysis to determine/compute safety guarantees for control policies.
+Using reachability analysis to determine/compute safety guarantees for control policies.
