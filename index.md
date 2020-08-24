@@ -1,4 +1,42 @@
+
+## Prerequisites 
+
+- [Control Theory
+  Basics](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m)
+  (first six videos are relevant)
+
+
+- Math 
+  - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
+  - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
+  - 
+
+
+- Programming
+    - Python (Future toolboxes should have python interfaces)
+    - MATLAB (Currently the most well-documented toolbox is in Matlab)
+    - C++ (For the low level implementations of the algorithms and GPU support)
+    - 
+
+
+- Recommended Reading
+    - [Hamilton-Jacobi Reachability: A Brief Overview and Recent
+      Advances](https://arxiv.org/abs/1709.07523)
+    
+
+## Setup
+
+- ### HelperOC toolbox
+
+    1. Install matlab
+    2. Follow the instructions to download the levelset toolbox [here]()
+    3. Follow the instructions to download the helperOC toolbox [here]()
+    4. You may find [this tutorial]() helpful
+
+
+
 ## Welcome to GitHub Pages
+
 
 You can use the [editor on GitHub](https://github.com/rvl-lab-utoronto/backwards-reachability/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
