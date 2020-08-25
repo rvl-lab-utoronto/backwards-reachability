@@ -10,12 +10,14 @@
   - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
   - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
   - 
+  - 
 
 
 - Programming
     - Python (Future toolboxes should have python interfaces)
     - MATLAB (Currently the most well-documented toolbox is in Matlab)
     - C++ (For the low level implementations of the algorithms and GPU support)
+    - 
     - 
 
 
@@ -29,9 +31,28 @@
 - ### HelperOC toolbox
 
     1. Install matlab
-    2. Follow the instructions to download the levelset toolbox [here]()
-    3. Follow the instructions to download the helperOC toolbox [here]()
-    4. You may find [this tutorial]() helpful
+    2. Follow the instructions to download the levelset toolbox [here](https://www.cs.ubc.ca/~mitchell/ToolboxLS/)
+    3. Follow the instructions to download the helperOC toolbox [here](https://github.com/HJReachability/helperOC)
+    4. You may find [this tutorial](https://youtu.be/iWsfc107nRc) helpful
+
+# Reachability Notes 
+
+Reachability formalizes the idea of 
+
+**"what states in the _configuration space_ can you reach as time passes".**
+
+A mistake I made when first trying to understand this
+was that I thought about this purely geometrically. As in, only thinking about
+location, and not _configuration_. A good counterexample is to think of the
+reachability sets of rubick's cube configurations. Here the set is discrete, and
+it doesn't make sense to describe it with Euclidean space.
+
+![Rubicks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
+
+Here is a simple geometric example involving a [dubin's car](https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/): You can see the set of all the possible
+"locations" that are reachable increase as time increases.  
+
+![Reach](https://i.imgur.com/OPUjO6G.gif)
 
 
 
