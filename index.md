@@ -9,8 +9,15 @@
 - Math 
   - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
   - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
-  - [Koopman Analysis](https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVXUvppZTYNHKQUD-oWys9)
-  - 
+  - Koopman Spectral Analysis (recommended order below)
+    1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8)
+    2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9)
+    3. [Koopman Observable Subspaces & Finite Linear Representations of Nonlinear Dynamics for Control](https://www.youtube.com/watch?v=K5CRbC4yqnk&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=10)
+    4. [Koopman Observable Subspaces & Nonlinearization](https://www.youtube.com/watch?v=pnGsQAt0od4&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=11)
+    5. [Koopman Operator Optimal Control](https://www.youtube.com/watch?v=qOdwRel-1xA&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=12)
+    6. [Representations](https://www.youtube.com/watch?v=--J7F6khJD0&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=13)
+    7. [Continuous Spectrum](https://www.youtube.com/watch?v=JJaxltAN9Ug&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=16)
+    8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17)
 
 
 - Programming
