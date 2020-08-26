@@ -9,7 +9,7 @@
 - Math 
   - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
   - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
-  - 
+  - [Koopman Analysis](https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVXUvppZTYNHKQUD-oWys9)
   - 
 
 
