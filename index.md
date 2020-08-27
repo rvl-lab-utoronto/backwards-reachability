@@ -3,14 +3,11 @@
 
 ## Prerequisites 
 
-- [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
-
-
 - Math 
   - [Linear Algebra][]{:target="_blank"}
   - [Differential Equations][]{:target="_blank"}
     - In terms of the theory, pretty much everything in reachability comes down to solving non-linear (often partial) differential equations. The more comfortable you are with them, the better.     
-&nbsp;
+<!-- &nbsp; -->
 
 - Programming
   - Python (Future toolboxes should have python interfaces)
@@ -18,12 +15,37 @@
   - C++ (For the low level implementations of the algorithms and GPU support)
             
 <!-- &nbsp; -->
+- Control Theory
+  - [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
+  - Dynamical Systems
+    - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt){:target="_blank"}
+    - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2){:target="_blank"}
+
 
 
 - Recommended Reading
   - [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability][]{:target="_blank"}
   - [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances][]{:target="_blank"}
-  - [Reachability and Controllability Review][]{:target="_blank"} (you can skim after section 4.5)
+  - [Reachability and Controllability Review][]{:target="_blank"} (you can skim after section 4.5)  
+&nbsp;
+
+- (Optional) Techniques for "Linearizing" Non Linear Systems:
+  - Dynamic Mode Decomposition
+    1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4){:target="_blank"}
+    2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5){:target="_blank"}
+    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s){:target="_blank"}
+    
+  - Koopman Spectral Analysis (recommended order below){:target="_blank"}
+    1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8){:target="_blank"}
+    2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9){:target="_blank"}
+    3. [Koopman Observable Subspaces & Finite Linear Representations of Nonlinear Dynamics for Control](https://www.youtube.com/watch?v=K5CRbC4yqnk&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=10){:target="_blank"}
+    4. [Koopman Observable Subspaces & Nonlinearization](https://www.youtube.com/watch?v=pnGsQAt0od4&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=11){:target="_blank"}
+    5. [Koopman Operator Optimal Control](https://www.youtube.com/watch?v=qOdwRel-1xA&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=12){:target="_blank"}
+    6. [Representations](https://www.youtube.com/watch?v=--J7F6khJD0&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=13){:target="_blank"}
+    7. [Continuous Spectrum](https://www.youtube.com/watch?v=JJaxltAN9Ug&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=16){:target="_blank"}
+    8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17){:target="_blank"}
+
+
 
   [Control Theory Basics]: https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m
   [Linear Algebra]: https://youtu.be/fNk_zzaMoSs
