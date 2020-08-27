@@ -7,8 +7,8 @@
   - [Linear Algebra][]{:target="_blank"}
   - [Differential Equations][]{:target="_blank"}
     - In terms of the theory, pretty much everything in reachability comes down to solving non-linear (often partial) differential equations. The more comfortable you are with them, the better.     
-<!-- &nbsp; -->
 
+<!-- &nbsp; -->
 - Programming
   - Python (Future toolboxes should have python interfaces)
   - MATLAB (Currently the most well-documented toolbox is in Matlab)
@@ -21,14 +21,15 @@
     - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt){:target="_blank"}
     - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2){:target="_blank"}
 
-
-
-- Recommended Reading
+<!-- &nbsp; -->
+- Reachability
   - [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability][]{:target="_blank"}
   - [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances][]{:target="_blank"}
   - [Reachability and Controllability Review][]{:target="_blank"} (you can skim after section 4.5)  
-&nbsp;
+  - [Introduction to Reachability](https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf){:target="_blank"}
+  - [Comparing Forward and Backward Reachability as Tools for Safety Analysis](https://www.cs.ubc.ca/~mitchell/Papers/myHSCC07.pdf){:target="_blank"}
 
+<!-- &nbsp; -->
 - (Optional) Techniques for "Linearizing" Non Linear Systems:
   - Dynamic Mode Decomposition
     1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4){:target="_blank"}
