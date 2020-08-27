@@ -1,9 +1,14 @@
 
 # Backwards Reachability: A Tutorial
 
-## Goals
-1. The backwards reachable set (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time [1][]{:target="_blank"}. We hope to use it as a safety guarantee for self-driving vehicles by computing the BRS with control policies from a set of final states that involve accidents and avoiding being in states from the BRS.
+## Project Description
+  The [backwards reachable set][]{:target="_blank"} (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. We hope to use it as a safety guarantee for self-driving vehicles by computing the BRS with control policies from a set of final states that involve accidents and avoiding being in states from the BRS. We utilize Ian Mitchell's level set method [toolbox][]{:target="_blank"} and the HelperOC toolbox by Sylvia Herbert, Mo Chen and others to compute the BRS (instruction below). 
 
+  The second component of this project is to contribute a new way of computing the BRS for nonlinear systems such as for a self-driving car. We would use the Koopman operator to decompose and transform the nonlinear system into special measurement coordinate so it appears to be a linear system. We would then compute the BRS for the linear system that the nonlinear system has turned into using simple matrix manipulation and multiplication. We should be able to verify the results of this method with the previously mentioned approach that directly computes the BRS for a nonlinear system.  
+
+
+[backwards reachable set]: https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf
+[toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 
 
 ## Prerequisites 
@@ -35,7 +40,7 @@
 
 <!-- &nbsp; -->
 - (Optional) Techniques for "Linearizing" Non Linear Systems:
-  - [Dynamic Mode Decomposition][]{:target="_blank"} (to better understand Koopman)
+  - [Dynamic Mode Decomposition][]{:target="_blank"} (to approximate Koopman operator)
   - [Koopman Spectral Analysis][]{:target="_blank"}
 
 
@@ -48,7 +53,7 @@
   [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
   [Koopman Spectral Analysis]: https://www.youtube.com/playlist?list=PLqA5alXk-vhisuj1TPPxl43__7vza--q0
   [Dynamic Mode Decomposition]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjoCnv4-5Ql_IFRU2xeXyhG
-  [1]: https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf
+
     
 
 ## Setup
