@@ -1,6 +1,11 @@
 
 # Backwards Reachability: A Tutorial
 
+## Goals
+1. The backwards reachable set (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time [1][]{:target="_blank"}. We hope to use it as a safety guarantee for self-driving vehicles by computing the BRS with control policies from a set of final states that involve accidents and avoiding being in states from the BRS.
+
+
+
 ## Prerequisites 
 
 - Math 
@@ -13,8 +18,9 @@
   - Python (Future toolboxes should have python interfaces)
   - MATLAB (Currently the most well-documented toolbox is in Matlab)
   - C++ (For the low level implementations of the algorithms and GPU support)
-            
-<!-- &nbsp; -->
+
+
+## Resources     
 - Control Theory
   - [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
   - [Dynamical Systems][]{:target="_blank"}
@@ -42,6 +48,7 @@
   [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
   [Koopman Spectral Analysis]: https://www.youtube.com/playlist?list=PLqA5alXk-vhisuj1TPPxl43__7vza--q0
   [Dynamic Mode Decomposition]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjoCnv4-5Ql_IFRU2xeXyhG
+  [1]: https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf
     
 
 ## Setup
