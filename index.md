@@ -29,7 +29,7 @@
 
 <!-- &nbsp; -->
 - (Optional) Techniques for "Linearizing" Non Linear Systems:
-  - [Dynamic Mode Decomposition] (To better understand Koopman)[]{:target="_blank"}
+  - [Dynamic Mode Decomposition][] (To better understand Koopman)[]{:target="_blank"}
   - [Koopman Spectral Analysis][]{:target="_blank"}
 
 
