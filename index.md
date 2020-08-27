@@ -58,7 +58,7 @@
 
 ## Setup
 
-- ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others)
+- ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
   This is a matlab toolbox (that uses another toolbox) to compute backwards reachable sets. Currently it is the most well documented and easiest to use.
 
@@ -92,11 +92,35 @@
 
     <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target.set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of theta) the initial positions that will enter the target set in the time horizon are different.  I hope that made sense
 
+- ### Optimized DP  (by Mo Chen and others) which uses BEACLS (by Ken Tanabe, Somil Bansal and others) <br />  [*Python interface, C++ implementation* ]
+
+  This Python project is currently in a work in progress, and the C++ library called BEACLS (which is just a C++ version of the helperOC + LevelSet toolboxes with GPU support) that it is based on is relatively recent, and does not have comprehensive tutorials as of yet. So there's a fair amount of trial and error here, but it's most likely the way forward in the long term.
+
+  I'd recommend creating a new Python virtual environment with conda for using this tool as well. If you don't know what those are, you should [really][]{:target="_blank"} [change that][]{:target="_blank}.
+
+  1. Clone the [optimized_dp][]{:target="_blank"} repo and follow the instructions in the readme
+  2. You'll need to install [HeteroCL][]{:target="_blank"} library as well (the virtual env comes in handy here)
+  3. Define your problem in the user_definer.py and then run solver.py. <br />
+    NOTE: The solver.py file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :(
+
+  As mentioned before, this is still a work in progress so be prepared to have things not work exactly and to experiment. 
+
+
+
+
+
+
+
+
 [basic matlab tutorials here]: https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
 [levelset toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 [helperOC toolbox]: https://github.com/HJReachability/helperOC
 [tutorial.m]: https://github.com/HJReachability/helperOC/blob/master/tutorial.m
 
+[really]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+[change that]: https://towardsdatascience.com/virtual-environments-104c62d48c54
+[optimized_dp]: https://github.com/SFU-MARS/optimized_dp
+[HeteroCL]: http://heterocl.csl.cornell.edu/doc/installation.html
 
 
 
