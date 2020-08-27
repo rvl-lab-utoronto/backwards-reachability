@@ -29,10 +29,7 @@
 
 <!-- &nbsp; -->
 - (Optional) Techniques for "Linearizing" Non Linear Systems:
-  - Dynamic Mode Decomposition[
-    1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4){:target="_blank"}
-    2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5){:target="_blank"}
-    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s)]{:target="_blank"}
+  - [Dynamic Mode Decomposition] (To better understand Koopman)[]{:target="_blank"}
   - [Koopman Spectral Analysis][]{:target="_blank"}
 
 
@@ -44,6 +41,7 @@
   [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances]: https://arxiv.org/abs/1709.07523
   [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
   [Koopman Spectral Analysis]: https://www.youtube.com/playlist?list=PLqA5alXk-vhisuj1TPPxl43__7vza--q0
+  [Dynamic Mode Decomposition]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjoCnv4-5Ql_IFRU2xeXyhG
     
 
 ## Setup
