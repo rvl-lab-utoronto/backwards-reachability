@@ -1,14 +1,20 @@
 
 ## Prerequisites 
 
-- [Control Theory
+- Control Theory
+  - [Control Theory
   Basics](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m)
   (first six videos are relevant)
+  - [Dynamical Systems]
+    - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt)
+    - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2)
 
-
-- Math 
-  - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
-  - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
+- Techniques
+  - [Dynamic Mode Decomposition]
+    1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4)
+    2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5)
+    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s)
+    
   - Koopman Spectral Analysis (recommended order below)
     1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8)
     2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9)
@@ -19,11 +25,14 @@
     7. [Continuous Spectrum](https://www.youtube.com/watch?v=JJaxltAN9Ug&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=16)
     8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17)
 
+- Math 
+  - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
+  - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
 
 - Programming
-    - Python (Future toolboxes should have python interfaces)
-    - MATLAB (Currently the most well-documented toolbox is in Matlab)
-    - C++ (For the low level implementations of the algorithms and GPU support)
+    - Python (future toolboxes should have python interfaces)
+    - MATLAB (currently the most well-documented toolbox is in Matlab)
+    - C++ (for the low level implementations of the algorithms and GPU support)
     - 
     - 
 
