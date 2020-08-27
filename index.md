@@ -136,7 +136,8 @@ A mistake I made when first trying to understand this was that I thought about t
 
 ![Rubicks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
 
-Here is a simple geometric example involving a [dubin's car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases.  
+Here is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. <br />
+You can read more about a Dubin's Car in Steve LaValle's [PLanning Algorithms textbook][]{:target="_blank"}
 
 ![Reach](https://i.imgur.com/OPUjO6G.gif)
 
@@ -144,9 +145,9 @@ Here is a simple geometric example involving a [dubin's car][]{:target="-blank"}
 
 
 
-[dubin's car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
+[Dubin's Car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
 
-
+[PLanning Algorithms textbook]: http://planning.cs.uiuc.edu/node657.html#sec:wheeled
 
 
 Links
