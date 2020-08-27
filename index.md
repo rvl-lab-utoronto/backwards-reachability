@@ -1,39 +1,82 @@
 
+# Backwards Reachability: A Tutorial
+
 ## Prerequisites 
 
-- [Control Theory
-  Basics](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m)
-  (first six videos are relevant)
+- [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
 
 
 - Math 
-  - [Linear Algebra](https://youtu.be/fNk_zzaMoSs)
-  - [Differential Equations](https://youtu.be/p_di4Zn4wz4)
-  - 
-  - 
-
+  - [Linear Algebra][]{:target="_blank"}
+  - [Differential Equations][]{:target="_blank"}
+    - In terms of the theory, pretty much everything in reachability comes down to solving non-linear (often partial) differential equations. The more comfortable you are with them, the better.     
+&nbsp;
 
 - Programming
-    - Python (Future toolboxes should have python interfaces)
-    - MATLAB (Currently the most well-documented toolbox is in Matlab)
-    - C++ (For the low level implementations of the algorithms and GPU support)
-    - 
-    - 
+  - Python (Future toolboxes should have python interfaces)
+  - MATLAB (Currently the most well-documented toolbox is in Matlab)
+  - C++ (For the low level implementations of the algorithms and GPU support)
+            
+<!-- &nbsp; -->
 
 
 - Recommended Reading
-    - [Hamilton-Jacobi Reachability: A Brief Overview and Recent
-      Advances](https://arxiv.org/abs/1709.07523)
+  - [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability][]{:target="_blank"}
+  - [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances][]{:target="_blank"}
+  - [Reachability and Controllability Review][]{:target="_blank"} (you can skim after section 4.5)
+
+  [Control Theory Basics]: https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m
+  [Linear Algebra]: https://youtu.be/fNk_zzaMoSs
+  [Differential Equations]: https://youtu.be/p_di4Zn4wz4
+  [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability]: https://youtu.be/iWsfc107nRc
+  [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances]: https://arxiv.org/abs/1709.07523
+  [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
     
 
 ## Setup
 
-- ### HelperOC toolbox
+- ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others)
 
-    1. Install matlab
-    2. Follow the instructions to download the levelset toolbox [here](https://www.cs.ubc.ca/~mitchell/ToolboxLS/)
-    3. Follow the instructions to download the helperOC toolbox [here](https://github.com/HJReachability/helperOC)
-    4. You may find [this tutorial](https://youtu.be/iWsfc107nRc) helpful
+  This is a matlab toolbox (that uses another toolbox) to compute backwards reachable sets. Currently it is the most well documented and easiest to use.
+
+  If you don't know how to install toolboxes in matlab you can find [basic matlab tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows matlab to spend 30 minutes showing you the basics.
+
+  Steps:
+
+  1. Install matlab
+  2. Follow the instructions to download and install the [levelset toolbox][]{:target="_blank"}
+  3. Follow the instructions to download and install the [helperOC toolbox][]{:target="_blank"}
+  4. In the helperOC repo, there is a file called [tutorial.m][]{:target="-blank"} that goes through the basics of using the toolbox. You should experiment with it until you feel comfortable.
+  
+  Here are some questions I asked Sylvia Herbert while I was working on this, you may treat it as a short FAQ: 
+
+  - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
+
+    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like shapeRectangleByCorners(grid, [-1 -inf], [1, inf]).  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
+
+
+  - <span style="color:dodgerblue"> *Ali* : </span> How do I combine shapes? You say in your HJR paper that "The obstacles should then be combined in a cell structure and set to HJIextraArgs.obstacles" I'm not sure how to do this.
+
+    <span style="color:limegreen"> *Sylvia* :</span> You can do things like shapeUnion and shapeIntersect.  You can also create your own signed distance function if you have some really weird shape (again I'd recommend looking into the shaping functions to see how it's done)
+
+
+  - <span style="color:dodgerblue"> *Ali* : </span> How do I label the axis(s) in the grid object? It's hard to figure out what effect my changes are having when I don't know whats changing.
+
+    <span style="color:limegreen"> *Sylvia* :</span> If you type "edit HJIPDE_solve" into the command like it'll bring up that function.  You'll see at the top we have a lot of instructions on all the bells and whistles you can add to the computation.  One of them is to say (for example) extraArgs.visualize.xTitle = 'x'; extraArgs.visualize.yTitle = 'v'
+
+
+  - <span style="color:dodgerblue"> *Ali* : </span> Why does it make the corkscrew pattern? The dubins car only has an x and y position geometrically so like, shouldn't it just make a bigger cynlinder around the target cylinder?
+
+    <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target.set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of theta) the initial positions that will enter the target set in the time horizon are different.  I hope that made sense
+
+[basic matlab tutorials here]: https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
+[levelset toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
+[helperOC toolbox]: https://github.com/HJReachability/helperOC
+[tutorial.m]: https://github.com/HJReachability/helperOC/blob/master/tutorial.m
+
+
+
+
 
 # Reachability Notes 
 
@@ -41,19 +84,54 @@ Reachability formalizes the idea of
 
 **"what states in the _configuration space_ can you reach as time passes".**
 
-A mistake I made when first trying to understand this
-was that I thought about this purely geometrically. As in, only thinking about
-location, and not _configuration_. A good counterexample is to think of the
-reachability sets of rubick's cube configurations. Here the set is discrete, and
-it doesn't make sense to describe it with Euclidean space.
+A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubick's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
 ![Rubicks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
 
-Here is a simple geometric example involving a [dubin's car](https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/): You can see the set of all the possible
-"locations" that are reachable increase as time increases.  
+Here is a simple geometric example involving a [dubin's car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases.  
 
 ![Reach](https://i.imgur.com/OPUjO6G.gif)
 
+
+
+
+
+[dubin's car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
+
+
+
+
+Links
+-----
+
+For a URL or email, just write it like this:
+
+<http://someurl>
+
+<somebbob@example.com>
+
+
+To use text for the link, write it [like this](http://someurl).
+
+You can add a *title* (which shows up under the cursor), 
+[like this](http://someurl "this title shows up when you hover").
+
+Reference Links
+---------------
+
+You can also put the [link URL][1] below the current paragraph like [this][2].
+
+   [1]: http://url
+   [2]: http://another.url "A funky title"
+
+Here the text "link URL" gets linked to "http://url", and the lines showing 
+"[1]: http://url" won't show anything.
+
+
+Or you can use a [shortcut][] reference, which links the text "shortcut" 
+to the link named "[shortcut]" on the next paragraph.
+
+   [shortcut]: http://goes/with/the/link/name/text
 
 
 ## Welcome to GitHub Pages
