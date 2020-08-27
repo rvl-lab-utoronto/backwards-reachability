@@ -29,20 +29,11 @@
 
 <!-- &nbsp; -->
 - (Optional) Techniques for "Linearizing" Non Linear Systems:
-  - Dynamic Mode Decomposition
+  - Dynamic Mode Decomposition[
     1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4){:target="_blank"}
     2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5){:target="_blank"}
-    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s){:target="_blank"}
-    
-  - Koopman Spectral Analysis (recommended order below)
-    1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8){:target="_blank"}
-    2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9){:target="_blank"}
-    3. [Koopman Observable Subspaces & Finite Linear Representations of Nonlinear Dynamics for Control](https://www.youtube.com/watch?v=K5CRbC4yqnk&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=10){:target="_blank"}
-    4. [Koopman Observable Subspaces & Nonlinearization](https://www.youtube.com/watch?v=pnGsQAt0od4&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=11){:target="_blank"}
-    5. [Koopman Operator Optimal Control](https://www.youtube.com/watch?v=qOdwRel-1xA&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=12){:target="_blank"}
-    6. [Representations](https://www.youtube.com/watch?v=--J7F6khJD0&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=13){:target="_blank"}
-    7. [Continuous Spectrum](https://www.youtube.com/watch?v=JJaxltAN9Ug&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=16){:target="_blank"}
-    8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17){:target="_blank"}
+    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s)]{:target="_blank"}
+  - [Koopman Spectral Analysis][]{:target="_blank"}
 
 
   [Dynamical Systems]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjrx1KxRdA2cq-5YnnXSNSK
@@ -52,6 +43,7 @@
   [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability]: https://youtu.be/iWsfc107nRc
   [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances]: https://arxiv.org/abs/1709.07523
   [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
+  [Koopman Spectral Analysis]: https://www.youtube.com/playlist?list=PLqA5alXk-vhisuj1TPPxl43__7vza--q0
     
 
 ## Setup
