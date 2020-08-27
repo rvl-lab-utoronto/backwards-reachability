@@ -5,12 +5,12 @@
   - [Control Theory
   Basics](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m)
   (first six videos are relevant)
-  - [Dynamical Systems]
+  - Dynamical Systems
     - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt)
     - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2)
 
 - Techniques
-  - [Dynamic Mode Decomposition]
+  - Dynamic Mode Decomposition
     1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4)
     2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5)
     3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s)
