@@ -40,7 +40,7 @@
   - [Comparing Forward and Backward Reachability as Tools for Safety Analysis](https://www.cs.ubc.ca/~mitchell/Papers/myHSCC07.pdf){:target="_blank"}
 
 <!-- &nbsp; -->
-- (Optional) Techniques for "Linearizing" Non Linear Systems:
+- Techniques for "Linearizing" Non Linear Systems:
   - [Dynamic Mode Decomposition][]{:target="_blank"} (to approximate Koopman operator)
   - [Koopman Spectral Analysis][]{:target="_blank"}
 
@@ -57,7 +57,7 @@
 
     
 
-## Setup
+## Toolbox Setup
 
 - ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others)
 
