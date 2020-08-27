@@ -35,7 +35,7 @@
     2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5){:target="_blank"}
     3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s){:target="_blank"}
     
-  - Koopman Spectral Analysis (recommended order below){:target="_blank"}
+  - Koopman Spectral Analysis (recommended order below)
     1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8){:target="_blank"}
     2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9){:target="_blank"}
     3. [Koopman Observable Subspaces & Finite Linear Representations of Nonlinear Dynamics for Control](https://www.youtube.com/watch?v=K5CRbC4yqnk&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=10){:target="_blank"}
