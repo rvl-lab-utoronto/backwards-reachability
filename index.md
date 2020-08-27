@@ -17,9 +17,7 @@
 <!-- &nbsp; -->
 - Control Theory
   - [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
-  - Dynamical Systems
-    - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt){:target="_blank"}
-    - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2){:target="_blank"}
+  - [Dynamical Systems][]{:target="_blank"}
 
 <!-- &nbsp; -->
 - Reachability
@@ -47,7 +45,7 @@
     8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17){:target="_blank"}
 
 
-
+  [Dynamical Systems]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjrx1KxRdA2cq-5YnnXSNSK
   [Control Theory Basics]: https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m
   [Linear Algebra]: https://youtu.be/fNk_zzaMoSs
   [Differential Equations]: https://youtu.be/p_di4Zn4wz4
