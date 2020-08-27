@@ -1,6 +1,17 @@
 
 # Backwards Reachability: A Tutorial
 
+## Project Description
+  The [backwards reachable set][]{:target="_blank"} (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. We hope to use it as a safety guarantee for self-driving vehicles by computing the BRS with control policies from a set of final states that involve accidents and avoiding being in states from the BRS. We utilize Ian Mitchell's level set method [toolbox][]{:target="_blank"} and the HelperOC toolbox by Sylvia Herbert, Mo Chen and others to compute the BRS (instruction below). 
+
+  The second component of this project is to contribute a new way of computing the BRS for nonlinear systems such as for a self-driving car. We would use the [Koopman operator][]{:target="_blank"} to decompose and transform the nonlinear system into special measurement coordinate so it appears to be a linear system. We would then compute the BRS for the linear system that the nonlinear system has turned into using simple matrix manipulation and multiplication. We should be able to verify the results of this method with the previously mentioned approach that directly computes the BRS for a nonlinear system.  
+
+
+[backwards reachable set]: https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf
+[toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
+[Koopman operator]: https://www.mit.edu/~arbabi/research/KoopmanIntro.pdf
+
+
 ## Prerequisites 
 
 - Math 
@@ -13,13 +24,12 @@
   - Python (Future toolboxes should have python interfaces)
   - MATLAB (Currently the most well-documented toolbox is in Matlab)
   - C++ (For the low level implementations of the algorithms and GPU support)
-            
-<!-- &nbsp; -->
+
+
+## Resources     
 - Control Theory
   - [Control Theory Basics][]{:target="_blank"} (first six videos are relevant)
-  - Dynamical Systems
-    - [Data-Driven Dynamical Systems Overview](https://www.youtube.com/playlist?list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt){:target="_blank"}
-    - [Discrete-Time Dynamical Systems](https://www.youtube.com/watch?v=0dvF2jesB4E&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=2){:target="_blank"}
+  - [Dynamical Systems][]{:target="_blank"}
 
 <!-- &nbsp; -->
 - Reachability
@@ -30,33 +40,24 @@
   - [Comparing Forward and Backward Reachability as Tools for Safety Analysis](https://www.cs.ubc.ca/~mitchell/Papers/myHSCC07.pdf){:target="_blank"}
 
 <!-- &nbsp; -->
-- (Optional) Techniques for "Linearizing" Non Linear Systems:
-  - Dynamic Mode Decomposition
-    1. [Overview](https://www.youtube.com/watch?v=sQvrK8AGCAo&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=4){:target="_blank"}
-    2. [Examples](https://www.youtube.com/watch?v=wheHQAhJWco&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=5){:target="_blank"}
-    3. [Code](https://www.youtube.com/watch?v=kVbEHH_laNU&list=PLMrJAkhIeNNR6DzT17-MM1GHLkuYVjhyt&index=5&t=1s){:target="_blank"}
-    
-  - Koopman Spectral Analysis (recommended order below)
-    1. [Overview](https://www.youtube.com/watch?v=J7s0XNT96ag&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=8){:target="_blank"}
-    2. [Control](https://www.youtube.com/watch?v=dx2f4exDZnU&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=9){:target="_blank"}
-    3. [Koopman Observable Subspaces & Finite Linear Representations of Nonlinear Dynamics for Control](https://www.youtube.com/watch?v=K5CRbC4yqnk&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=10){:target="_blank"}
-    4. [Koopman Observable Subspaces & Nonlinearization](https://www.youtube.com/watch?v=pnGsQAt0od4&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=11){:target="_blank"}
-    5. [Koopman Operator Optimal Control](https://www.youtube.com/watch?v=qOdwRel-1xA&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=12){:target="_blank"}
-    6. [Representations](https://www.youtube.com/watch?v=--J7F6khJD0&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=13){:target="_blank"}
-    7. [Continuous Spectrum](https://www.youtube.com/watch?v=JJaxltAN9Ug&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=16){:target="_blank"}
-    8. [Multiscale Systems](https://www.youtube.com/watch?v=J1MIaTdOL5A&list=PLqA5alXk-vhjOeNKanHLgKhww_nCJ_bxu&index=17){:target="_blank"}
+- Techniques for "Linearizing" Non Linear Systems:
+  - [Dynamic Mode Decomposition][]{:target="_blank"} (to approximate Koopman operator)
+  - [Koopman Spectral Analysis][]{:target="_blank"}
 
 
-
+  [Dynamical Systems]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjrx1KxRdA2cq-5YnnXSNSK
   [Control Theory Basics]: https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m
   [Linear Algebra]: https://youtu.be/fNk_zzaMoSs
   [Differential Equations]: https://youtu.be/p_di4Zn4wz4
   [Hamilton-Jacobi Reachability Tutorial: Basics of HJ Reachability]: https://youtu.be/iWsfc107nRc
   [Hamilton-Jacobi Reachability: A Brief Overview and Recent Advances]: https://arxiv.org/abs/1709.07523
   [Reachability and Controllability Review]: http://www.dii.unimo.it/~zanasi/didattica/Teoria_dei_Sistemi/Luc_TDS_ING_2016_Reachability_and_Controllability.pdf
+  [Koopman Spectral Analysis]: https://www.youtube.com/playlist?list=PLqA5alXk-vhisuj1TPPxl43__7vza--q0
+  [Dynamic Mode Decomposition]: https://www.youtube.com/playlist?list=PLqA5alXk-vhjoCnv4-5Ql_IFRU2xeXyhG
+
     
 
-## Setup
+## Toolbox Setup
 
 - ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
