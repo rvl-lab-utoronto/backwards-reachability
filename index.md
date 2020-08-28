@@ -81,26 +81,26 @@
   
   ### Short FAQ: 
 
-  - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
+  - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the $\theta$ dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
-    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like `<shapeRectangleByCorners(grid, [-1 -inf], [1, inf])>`.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
+    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like `shapeRectangleByCorners(grid, [-1 -inf], [1, inf])`.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
 
 
-  - <span style="color:dodgerblue"> *Ali* : </span> How do I combine shapes? You say in your HJR paper that "The obstacles should then be combined in a cell structure and set to HJIextraArgs.obstacles" I'm not sure how to do this.
+  - <span style="color:dodgerblue"> *Ali* : </span> How do I combine shapes? You say in your HJR paper that "the obstacles should then be combined in a cell structure and set to `HJIextraArgs.obstacles`", I'm not sure how to do this.
 
-    <span style="color:limegreen"> *Sylvia* :</span> You can do things like shapeUnion and shapeIntersect.  You can also create your own signed distance function if you have some really weird shape (again I'd recommend looking into the shaping functions to see how it's done)
+    <span style="color:limegreen"> *Sylvia* :</span> You can do things like `shapeUnion` and `shapeIntersect`.  You can also create your own signed distance function if you have some really weird shape (again I'd recommend looking into the shaping functions to see how it's done).
 
 
   - <span style="color:dodgerblue"> *Ali* : </span> How do I label the axis(s) in the grid object? It's hard to figure out what effect my changes are having when I don't know whats changing.
 
-    <span style="color:limegreen"> *Sylvia* :</span> If you type "edit HJIPDE_solve" into the command like it'll bring up that function.  You'll see at the top we have a lot of instructions on all the bells and whistles you can add to the computation.  One of them is to say (for example) extraArgs.visualize.xTitle = 'x'; extraArgs.visualize.yTitle = 'v'
+    <span style="color:limegreen"> *Sylvia* :</span> If you type `edit HJIPDE_solve` into the command like it'll bring up that function.  You'll see at the top we have a lot of instructions on all the bells and whistles you can add to the computation.  One of them is to say (for example) `extraArgs.visualize.xTitle = 'x'; extraArgs.visualize.yTitle = 'v'`.
 
 
   - <span style="color:dodgerblue"> *Ali* : </span> Why does it make the corkscrew pattern? The dubins car only has an x and y position geometrically so like, shouldn't it just make a bigger cynlinder around the target cylinder?
 
-    <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target.set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of theta) the initial positions that will enter the target set in the time horizon are different.  I hope that made sense
+    <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at $\theta$ = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of $\theta$) the initial positions that will enter the target set in the time horizon are different. 
 
-- ### Optimized DP  (by Mo Chen and others) which uses BEACLS (by Ken Tanabe, Somil Bansal and others) <br />  [*Python interface, C++ implementation* ]
+- ### Optimized DP  (by Mo Chen and others) Using BEACLS (by Ken Tanabe, Somil Bansal and others) <br />  [*Python interface, C++ implementation* ]
 
   This Python project is currently in a work in progress, and the C++ library called BEACLS (which is just a C++ version of the helperOC + LevelSet toolboxes with GPU support) that it is based on is relatively recent, and does not have comprehensive tutorials as of yet. So there's a fair amount of trial and error here, but it's most likely the way forward in the long term.
 
