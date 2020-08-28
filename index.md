@@ -149,9 +149,17 @@ That being said, most reachability problems will involve navigating some physica
 
 Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
 
-<span style="color:limegreen">NOTE : </span> This example was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also ignore the code blocks if you aren't interested in the implementation aspect, the underlying logic is the same.
+In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
 
+Example 1: 
 
+![New](https://i.imgur.com/qFN3xU3.gif)
+
+You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}
+
+### Example 1 Code
+
+The example above was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also ignore the code blocks if you aren't interested in the implementation aspect, the underlying logic is the same.
 
 [tutorial_example1.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/tutorial_example1.m){:target="_blank"}
 
@@ -227,18 +235,10 @@ HJIextraArgs.visualize.plotData.projpt = [0]; %project at theta = 0
 HJIextraArgs.visualize.viewAngle = [0,90]; % view 2
 ```
 
-In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
-
-You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}
-
-Example 1: 
-![Reach](https://i.imgur.com/OPUjO6G.gif)
-
-![New](https://i.imgur.com/qFN3xU3.gif)
 
 ## Okay, but...
 
-But this example just begs the question **"How exactly does the set grow with respect to time?"** <br />. You might even question the assumption that the set should always grow ( which it does *not* ).
+But this example just begs the question **"How exactly does the set grow with respect to time?"**. You might even question the assumption that the set should always grow ( which it does *not* ).
 
 ### What determines the set?
 
