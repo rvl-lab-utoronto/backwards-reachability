@@ -151,7 +151,7 @@ Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"
 
 In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
 
-Example 1: 
+Example 1:
 
 ![New](https://i.imgur.com/qFN3xU3.gif)
 
@@ -161,7 +161,7 @@ You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms te
 
 The example above was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also ignore the code blocks if you aren't interested in the implementation aspect, the underlying logic is the same.
 
-[tutorial_example1.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/tutorial_example1.m){:target="_blank"}
+Example 1 Code: [tutorial_example1.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/tutorial_example1.m){:target="_blank"}
 
 
 Here we setup the experiment by defining a grid, an initial set of states, and set the time for which we will run the simulation.
@@ -226,7 +226,7 @@ to
         vout = VideoWriter(extraArgs.videoFilename,'Motion JPEG AVI')
 ```
 
-And finally, we uncomment the code to generate a 2D slice of the original output, as it makes things simpler and easier to understand conceptually.
+And finally, we uncomment the code that renders a 2D slice of the original output, as it makes things simpler and easier to understand conceptually.
 
 ```matlab
 % uncomment if you want to see a 2D slice
@@ -266,11 +266,33 @@ The example above has no meaningful policy. Any action in the action space is al
 Here is another example where the policy is "go straight" (or "don't turn").
 
 Example 2: 
-![WithPolicy](https://i.imgur.com/ZDNcL7T.gif)
+
+![WithPolicy](https://i.imgur.com/k9BNZWd.gif)
 
 As you can see, it gets us a very different reachable set. For one, this policy **_is_ a function**, meaning that given a state, it only ever returns one action; i.e. Go one step backwards in the x direction from wherever you currently are.
 
-In example 1, there are many (technically infinitely many) actions the policy could choose;  For example: "go right", "go left", "go a little bit left", if the dynamics allow it, even ["turn right to go left"][]{:target="_blank"}
+In example 1, there are many (technically infinitely many) actions the policy could choose;  For example: "go right", "go left", "go a little bit left", if the dynamics allow it, even ["turn right][]{:target="_blank"}, [to go left"][]{:target="_blank"}
+
+### Example 2 Code
+
+In addition to the code from example 1, we simply change how the policy is computed in the file `optCtrl.m`. The original code is commented out and we add our changes below.
+
+Example 2 Code: Example 1 code + [optCtrl_example2.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/optCtrl_example2.m){:target="_blank"}
+
+As you can see, we take `obj.wRange(1)` and `obj,wRange(2)` which refer to the maximum turn input in the left and right respectively, and change them to `0.0`, this effectively makes the control always 0, or "don't turn".
+
+```matlab
+%% Optimal control
+if strcmp(uMode, 'max')
+  % uOpt = (deriv{obj.dims==3}>=0)*obj.wRange(2) + (deriv{obj.dims==3}<0)*(obj.wRange(1));
+  uOpt = (deriv{obj.dims==3}>=0)*0.0 + (deriv{obj.dims==3}<0)*(0.0);
+elseif strcmp(uMode, 'min')
+  % uOpt = (deriv{obj.dims==3}>=0)*(obj.wRange(1)) + (deriv{obj.dims==3}<0)*obj.wRange(2);
+  uOpt = (deriv{obj.dims==3}>=0)*(0.0) + (deriv{obj.dims==3}<0)*(0.0);
+else
+  error('Unknown uMode!')
+end
+```
 
 ## Noise / Disturbance 
 
@@ -284,11 +306,56 @@ In example 3, the policy is simply "always turn right", in example 4, its the ex
 
 Example 3: 
 
-![swirly](https://i.imgur.com/B8tjlmn.gif)
+![swirly](https://i.imgur.com/cdVBq7V.gif)
 
-Example 4: Lots of noise
+### Example 3 Code 
 
-![damped_swirly](https://i.imgur.com/xAugfTf.gif)
+
+
+Similar to the previous example, we take `obj.wRange(1)` and `obj,wRange(2)` and change them to *only* `obj,wRange(2)`, so the control input is always "turn maximum right" or "always turn right".
+
+Example 3 Code: Example 1 Code + [optCtrl_example3.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/optCtrl_example3.m){:target="_blank"}
+
+```matlab
+%% Optimal control
+if strcmp(uMode, 'max')
+  % uOpt = (deriv{obj.dims==3}>=0)*obj.wRange(2) + (deriv{obj.dims==3}<0)*(obj.wRange(1));
+  uOpt = (deriv{obj.dims==3}>=0)*obj.wRange(2) + (deriv{obj.dims==3}<0)*obj.wRange(2);
+elseif strcmp(uMode, 'min')
+  % uOpt = (deriv{obj.dims==3}>=0)*(obj.wRange(1)) + (deriv{obj.dims==3}<0)*obj.wRange(2);
+  uOpt = (deriv{obj.dims==3}>=0)*obj.wRange(2) + (deriv{obj.dims==3}<0)*obj.wRange(2);
+else
+  error('Unknown uMode!')
+end
+```
+### Noise / Disturbance continued 
+
+Now let's change the dynamics by adding more noise. This causes the reachable set to constantly shrink because you now have to account for the **_uncertainty_ of noise**. 
+
+As in, you look at the points near the boundary of your original reachable set and say "well if my calculations may be a little bit off this point might actually lie _outside_ the boundary. So let me only include the points that are _well within_ the boundary of my reachable set." 
+
+If you are forced to make this truncation at each time-step _and_ your policy is narrow in the sense that the reachable area stays constant with time, then your reachable set will shrink and eventually become the empty set.
+
+Example 4:
+
+![damped_swirly](https://i.imgur.com/bXLgLh2.gif)
+
+### Example 4 Code 
+
+In the `tutorial.m` file, there is a parameter you can change to add gaussian noise to the system in each state dimension separately. 
+
+Example 4 Code: Example 3 Code + [tutorial_example4.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/tutorial_example4.m){:target="_blank"}
+
+```matlab
+%% additive random noise
+HJIextraArgs.addGaussianNoiseStandardDeviation = [0; 0; 0.5];
+% Try other noise coefficients, like:
+%    [0.2; 0; 0]; % Noise on X state
+%    [0.2,0,0;0,0.2,0;0,0,0.5]; % Independent noise on all states
+%    [0.2;0.2;0.5]; % Coupled noise on all states
+%    {zeros(size(g.xs{1})); zeros(size(g.xs{1})); (g.xs{1}+g.xs{2})/20}; % State-dependent noise
+```
+
 
 ## But you said *backward*...
 
@@ -356,7 +423,8 @@ Good luck :wink:
 [Dubin's Car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
 
 [Planning Algorithms textbook]: http://planning.cs.uiuc.edu/node657.html#sec:wheeled
-["turn right to go left"]: https://youtu.be/-7Ra1LMYphM
+["turn right]: https://youtu.be/_ss9nd-tImc
+[to go left"]: https://youtu.be/-7Ra1LMYphM
 [Sylvia Herbert's website]: http://sylviaherbert.com/
 [reachability tutorials]: http://sylviaherbert.com/reachability-decomposition
 
