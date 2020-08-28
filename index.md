@@ -65,18 +65,19 @@
 - ### HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
   This is toolbox that uses Ian Mitchell's level set method [toolbox][]{:target="_blank"} to compute backwards reachable sets (BRS) in MATLAB. Currently it is the most well documented and easiest to use.
+
   [toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 
   If you don't know how to install toolboxes in MATLAB you can find [basic MATLAB tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows MATLAB to spend 30 minutes showing you the basics.
 
   Steps:
 
-  1. Install MATLAB
-  2. Follow the instructions to download and install the [levelset toolbox][]{:target="_blank"}
-  3. Follow the instructions to download and install the [helperOC toolbox][]{:target="_blank"}
+  1. Install MATLAB.
+  2. Follow the instructions to download and install the [levelset toolbox][]{:target="_blank"}.
+  3. Follow the instructions to download and install the [helperOC toolbox][]{:target="_blank"}.
   4. In the helperOC repo, there is a file called [tutorial.m][]{:target="-blank"} that goes through the basics of using the toolbox. You should experiment with it until you feel comfortable.
   
-  Here are some questions I asked [Sylvia Herbert][]{:target="_blank"} while I was working on this, you may treat it as a guidance and it may provide some clarifications. 
+  Here are some questions I asked [Sylvia Herbert][]{:target="_blank"} while I was working on this, you may treat it as a short FAQ. 
 
   [Sylvia Herbert]: http://sylviaherbert.com/ 
   
@@ -107,8 +108,8 @@
 
   I'd recommend creating a new Python virtual environment with conda for using this tool as well. If you don't know what those are, you should [really][]{:target="_blank"} [change that][]{:target="_blank}.
 
-  1. Clone the [optimized_dp][]{:target="_blank"} repo and follow the instructions in the readme
-  2. You'll need to install [HeteroCL][]{:target="_blank"} library as well (the virtual env comes in handy here)
+  1. Clone the [optimized_dp][]{:target="_blank"} repo and follow the instructions in the readme.
+  2. You'll need to install [HeteroCL][]{:target="_blank"} library as well (the virtual env comes in handy here).
   3. Define your problem in the `user_definer.py` and then run `solver.py`. <br />
     NOTE: The `solver.py` file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :(
 
