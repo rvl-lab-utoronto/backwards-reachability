@@ -62,9 +62,10 @@
 
 ## Toolbox Setup
 
-- ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
+- ### HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
-  This is a MATLAB toolbox (that uses another toolbox) to compute backwards reachable sets. Currently it is the most well documented and easiest to use.
+  This is toolbox that uses Ian Mitchell's level set method [toolbox][]{:target="_blank"} to compute backwards reachable sets (BRS) in MATLAB. Currently it is the most well documented and easiest to use.
+  [toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 
   If you don't know how to install toolboxes in MATLAB you can find [basic MATLAB tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows MATLAB to spend 30 minutes showing you the basics.
 
@@ -81,7 +82,7 @@
   
   ### Short FAQ: 
 
-  - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the $\theta$ dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
+  - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the \theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
     <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like `shapeRectangleByCorners(grid, [-1 -inf], [1, inf])`.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
 
@@ -98,7 +99,7 @@
 
   - <span style="color:dodgerblue"> *Ali* : </span> Why does it make the corkscrew pattern? The dubins car only has an x and y position geometrically so like, shouldn't it just make a bigger cynlinder around the target cylinder?
 
-    <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at $\theta$ = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of $\theta$) the initial positions that will enter the target set in the time horizon are different. 
+    <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at \theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of \theta) the initial positions that will enter the target set in the time horizon are different. 
 
 - ### Optimized DP  (by Mo Chen and others) Using BEACLS (by Ken Tanabe, Somil Bansal and others) <br />  [*Python interface, C++ implementation* ]
 
@@ -108,17 +109,10 @@
 
   1. Clone the [optimized_dp][]{:target="_blank"} repo and follow the instructions in the readme
   2. You'll need to install [HeteroCL][]{:target="_blank"} library as well (the virtual env comes in handy here)
-  3. Define your problem in the user_definer.py and then run solver.py. <br />
-    NOTE: The solver.py file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :(
+  3. Define your problem in the `user_definer.py` and then run `solver.py`. <br />
+    NOTE: The `solver.py` file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :sweat:
 
-  As mentioned before, this is still a work in progress so be prepared to have things not work exactly and to experiment. 
-
-
-
-
-
-
-
+  As mentioned before, this is still a work in progress so be prepared to have things not work exactly and to experiment!
 
 [basic MATLAB tutorials here]: https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
 [levelset toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
@@ -131,7 +125,7 @@
 [HeteroCL]: http://heterocl.csl.cornell.edu/doc/installation.html
 
 
-
+___
 
 # Reachability Notes 
 
@@ -141,12 +135,12 @@ Reachability formalizes the idea of
 
 **"what states in the _configuration space_ can you reach as time passes".**
 
-### Configuration space?
+### Configuration Space?
 
-A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubick's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
+A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubik's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
 
-![Rubicks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
+![Rubiks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
 
 That being said, most reachability problems will involve navigating some physical space.
 
@@ -163,7 +157,7 @@ Example 1:
 
 ## Okay, but...
 
-But this example just begs the question **"How exactly does the set grow with respect to time?"** <br /> (You might even question the assumption that the set should always grow ( which it does *not* )).
+But this example just begs the question **"How exactly does the set grow with respect to time?"** <br />. You might even question the assumption that the set should always grow ( which it does *not* ).
 
 ### What determines the set?
 
@@ -246,7 +240,7 @@ From a computation perspective, its pretty much identical.
 
 After this, you can start messing around to get a feel of what's possible with the toolboxes. Here's a personal favorite.
 
-Example ???:
+Example 5:
 
 ![crazzy](https://i.imgur.com/ETmNGj7.gif)
 
@@ -269,7 +263,7 @@ I don't know much about partial differential equations, lagrangian mechanics or 
 
 > "It might be well for all of us to remember that, while differing widely in the various little bits we know, in our infinite ignorance we are all equal." <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Karl Popper, Conjectures and Refutations
 
-Good luck.
+Good luck :wink:
 
 
 
