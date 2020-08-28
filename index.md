@@ -75,7 +75,11 @@
   3. Follow the instructions to download and install the [helperOC toolbox][]{:target="_blank"}
   4. In the helperOC repo, there is a file called [tutorial.m][]{:target="-blank"} that goes through the basics of using the toolbox. You should experiment with it until you feel comfortable.
   
-  Here are some questions I asked Sylvia Herbert while I was working on this, you may treat it as a short FAQ: 
+  Here are some questions I asked [Sylvia Herbert][]{:target="_blank"} while I was working on this, you may treat it as a 
+
+  [Sylvia Herbert]: http://sylviaherbert.com/ 
+  
+  ### Short FAQ: 
 
   - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
@@ -131,9 +135,13 @@
 
 # Reachability Notes 
 
+## What is Reachability?
+
 Reachability formalizes the idea of 
 
 **"what states in the _configuration space_ can you reach as time passes".**
+
+### Configuration space?
 
 A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubick's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
@@ -142,21 +150,33 @@ A mistake I made when first trying to understand this was that I thought about t
 
 That being said, most reachability problems will involve navigating some physical space.
 
+## In two (simple) dimensions...
+
 Here is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
 
 In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
 
+You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}
+
 Example 1: 
 ![Reach](https://i.imgur.com/OPUjO6G.gif)
 
+## Okay, but...
+
 But this example just begs the question **"How exactly does the set grow with respect to time?"** <br /> (You might even question the assumption that the set should always grow ( which it does *not* )).
+
+### What determines the set?
 
 There are two main things that determine the transformation of the reachable set with respect to time. The **_dynamics_** of the system, and the **_policy_**. <br />
 (Again, you may interject with "Isn't the policy technically just a part of the dynamics?" and in a sense, yes, that's a perfectly valid way to think about it but for the purposes of this project it is useful to treat them as separate)
 
+### What do we mean by policy?
+
 Typically in reinforcement learning, we think of policies as a **function**, as in, given a state, it picks *exactly one* action to take. For the purposes of this project, that is not the case. Here we think of policies simply as **_restrictions placed on the agents movement through the configuration space_**. A policy could be "stay at least two feet away from the walls", such a policy would forbid picking an action that gets you too close to a wall in the environment, but otherwise doesn't choose one action over another.
 
 The example above has no meaningful policy. Any action in the action space is allowed, so the dynamics are the only meaningful limitation, hence the set grows sharply in all directions, limited only by the speed of the car and its turning radius.
+
+## Different Policies?
 
 Here is another example where the policy is "go straight" (or "don't turn").
 
@@ -167,9 +187,13 @@ As you can see, it gets us a very different reachable set. For one, this policy 
 
 In example 1, there are many (technically infinitely many) actions the policy could choose;  For example: "go right", "go left", "go a little bit left", if the dynamics allow it, even ["turn right to go left"][]{:target="_blank"}
 
+### Noise / Disturbance 
+
 Something else you might notice if you look closely at example 2 is that the boundary of the set gets "smoother" with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter.
 
 This brings me to my next point, which is that one can also leave the policy constant and change the dynamics, which is why it's useful to think of them as separate. 
+
+## Different Dynamics?
 
 In example 3, the policy is simply "always turn right", in example 4, its the exact same policy, but with a lot more noise.
 
@@ -181,30 +205,42 @@ Example 4: Lots of noise
 
 ![damped_swirly](https://i.imgur.com/xAugfTf.gif)
 
+## But you said *backward*...
+
 At this point you may be wondering **"Okay, but why is it called _backward_ reachability?"**
 
 The unsatisfying answer is that for this project, we're focused on extrapolating backwards from unsafe states. The satisfying answer is because backwards and forward reachability are essentially the same thing.
 
-It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it. It continues to surprise me to this day. It's important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
+### The same, really?
 
-*Crazy*, I know.
+It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it. It continues to surprise me to this day. It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
+
+[*Crazy*, I know.][]{:target="_blank"}
+
+[*Crazy*, I know.]: https://i.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif
+
 
 Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems.
 
-You can think about forwards reachability as determining what states in the future your current policy is going to take you, and whether those states are good or bad.
+### If they're the same, what's the difference?
 
-You can think about backwards reachability as: given a certain good or bad future state, what previous states would you have to cross to get there, and whether or not you should seek or avoid such states, respectively.
+You can think about forward reachability as determining to *what* states in the *future* is your current policy going to take you, and whether those states are good or bad.
+
+You can think about backward reachability as: *given* a certain good or bad future state, what *previous* states would you have to cross to get there, and whether or not you should seek or avoid such states, respectively.
 
 From a computation perspective, its pretty much identical.
 
 [symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
 
+## What now?
 
 After this, you can start messing around to get a feel of what's possible with the toolboxes. Here's a personal favorite.
 
 Example ???:
 
 ![crazzy](https://i.imgur.com/ETmNGj7.gif)
+
+## Real Life Applications 
 
 These examples are obviously just for demonstration, when you're actually working on applications, several things are likely going to be different. For one, you're going to have a more complicated policy, you'll be working in higher dimensions, and you may have more than one moving part/ agent in the system. 
 
@@ -213,18 +249,35 @@ Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has s
 
 ![3d](https://bit.ly/32A9AQi)
 
+# Conclusion 
 
-You can read more about a Dubin's Car in Steve LaValle's [PLanning Algorithms textbook][]{:target="_blank"}
+I hope by this point you have a basic understanding of what this problem is, and why it's difficult. The papers linked to in the resources section paint a much more detailed picture, especially when it comes to the math, and the implementation of the math. I avoided here on purpose, showing someone the math for something, before giving them a high level explanation of what the math is describing can often be counterproductive. 
+
+But now, dear reader, you are ready. You should have a much easier (and frankly much saner) time reading through the literature on this topic, and making progress on this very cool and very interesting problem. 
+
+I don't know much about partial differential equations, lagrangian mechanics or hopf-lax formulas, but I can offer you a kernel of wisdom that often helps me put things in perspective: 
+
+> "It might be well for all of us to remember that, while differing widely in the various little bits we know, in our infinite ignorance we are all equal." <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Karl Popper, Conjectures and Refutations
+
+Good luck.
+
+
+
+
 
 
 
 
 [Dubin's Car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
 
-[PLanning Algorithms textbook]: http://planning.cs.uiuc.edu/node657.html#sec:wheeled
+[Planning Algorithms textbook]: http://planning.cs.uiuc.edu/node657.html#sec:wheeled
 ["turn right to go left"]: https://youtu.be/-7Ra1LMYphM
 [Sylvia Herbert's website]: http://sylviaherbert.com/
 [reachability tutorials]: http://sylviaherbert.com/reachability-decomposition
+
+
+<!-- 
+
 Links
 -----
 
@@ -295,4 +348,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out. -->
