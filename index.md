@@ -25,7 +25,7 @@
 <!-- &nbsp; -->
 - Programming
   - Python (Future toolboxes should have python interfaces)
-  - MATLAB (Currently the most well-documented toolbox is in Matlab)
+  - MATLAB (Currently the most well-documented toolbox is in MATLAB)
   - C++ (For the low level implementations of the algorithms and GPU support)
 
 
@@ -64,18 +64,18 @@
 
 - ### HelperOC toolbox (written by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
-  This is a matlab toolbox (that uses another toolbox) to compute backwards reachable sets. Currently it is the most well documented and easiest to use.
+  This is a MATLAB toolbox (that uses another toolbox) to compute backwards reachable sets. Currently it is the most well documented and easiest to use.
 
-  If you don't know how to install toolboxes in matlab you can find [basic matlab tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows matlab to spend 30 minutes showing you the basics.
+  If you don't know how to install toolboxes in MATLAB you can find [basic MATLAB tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows MATLAB to spend 30 minutes showing you the basics.
 
   Steps:
 
-  1. Install matlab
+  1. Install MATLAB
   2. Follow the instructions to download and install the [levelset toolbox][]{:target="_blank"}
   3. Follow the instructions to download and install the [helperOC toolbox][]{:target="_blank"}
   4. In the helperOC repo, there is a file called [tutorial.m][]{:target="-blank"} that goes through the basics of using the toolbox. You should experiment with it until you feel comfortable.
   
-  Here are some questions I asked [Sylvia Herbert][]{:target="_blank"} while I was working on this, you may treat it as a 
+  Here are some questions I asked [Sylvia Herbert][]{:target="_blank"} while I was working on this, you may treat it as a guidance and it may provide some clarifications. 
 
   [Sylvia Herbert]: http://sylviaherbert.com/ 
   
@@ -83,7 +83,7 @@
 
   - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
-    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like shapeRectangleByCorners(grid, [-1 -inf], [1, inf]).  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
+    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like '<shapeRectangleByCorners(grid, [-1 -inf], [1, inf])>'.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
 
 
   - <span style="color:dodgerblue"> *Ali* : </span> How do I combine shapes? You say in your HJR paper that "The obstacles should then be combined in a cell structure and set to HJIextraArgs.obstacles" I'm not sure how to do this.
@@ -120,7 +120,7 @@
 
 
 
-[basic matlab tutorials here]: https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
+[basic MATLAB tutorials here]: https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
 [levelset toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 [helperOC toolbox]: https://github.com/HJReachability/helperOC
 [tutorial.m]: https://github.com/HJReachability/helperOC/blob/master/tutorial.m
