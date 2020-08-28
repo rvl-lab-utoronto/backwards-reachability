@@ -1,15 +1,18 @@
 
 # Backwards Reachability: A Tutorial
 
-## Project Description
-  The [backwards reachable set][]{:target="_blank"} (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. We hope to use it as a safety guarantee for self-driving vehicles by computing the BRS with control policies from a set of final states that involve accidents and avoiding being in states from the BRS. We utilize Ian Mitchell's level set method [toolbox][]{:target="_blank"} and the HelperOC toolbox by Sylvia Herbert, Mo Chen and others to compute the BRS (instruction below). 
+  This is a project about safety analysis for safety critical dynamic systems. 
+  
+  In the context of a dynamic system, the [backwards reachable set][]{:target="_blank"} (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. If one can efficiently compute such sets, there is potential to use them to make safety guarantees for various autonomous systems, by determining whether some potential unsafe state will, in principle, ever be reached by a given policy. 
+  
+  In this tutorial, we describe the tools currently available to tackle this problem and how to use them. We also talk briefly about good and bad ways to think about the problem, from our own experience and time spent working on it.
 
-  The second component of this project is to contribute a new way of computing the BRS for nonlinear systems such as for a self-driving car. We would use the [Koopman operator][]{:target="_blank"} to decompose and transform the nonlinear system into special measurement coordinate so it appears to be a linear system. We would then compute the BRS for the linear system that the nonlinear system has turned into using simple matrix manipulation and multiplication. We should be able to verify the results of this method with the previously mentioned approach that directly computes the BRS for a nonlinear system.  
+  An additional component of this project is to make BRSs easier to compute for non-linear systems by "linearizing" them using [Koopman operator theory][]{:target="_blank"}.
 
 
 [backwards reachable set]: https://people.eecs.berkeley.edu/~somil/Papers/Introduction_to_Reachability_to_Share.pdf
 [toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
-[Koopman operator]: https://www.mit.edu/~arbabi/research/KoopmanIntro.pdf
+[Koopman operator theory]: https://www.mit.edu/~arbabi/research/KoopmanIntro.pdf
 
 
 ## Prerequisites 
@@ -178,13 +181,32 @@ Example 4: Lots of noise
 
 ![damped_swirly](https://i.imgur.com/xAugfTf.gif)
 
+At this point you may be wondering **"Okay, but why is it called _backward_ reachability?"**
+
+The unsatisfying answer is that for this project, we're focused on extrapolating backwards from unsafe states. The satisfying answer is because backwards and forward reachability are essentially the same thing.
+
+It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it. It continues to surprise me to this day. It's important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
+
+*Crazy*, I know.
+
+Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems.
+
+You can think about forwards reachability as determining what states in the future your current policy is going to take you, and whether those states are good or bad.
+
+You can think about backwards reachability as: given a certain good or bad future state, what previous states would you have to cross to get there, and whether or not you should seek or avoid such states, respectively.
+
+From a computation perspective, its pretty much identical.
+
+[symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
+
+
 After this, you can start messing around to get a feel of what's possible with the toolboxes. Here's a personal favorite.
 
 Example ???:
 
 ![crazzy](https://i.imgur.com/ETmNGj7.gif)
 
-These examples are obviously just for demonstration, when you're actually working on applications, several things are likely going to be different. For one, you're going to have a more complicated policy, you may be working in higher dimensions, and you may have more than one moving part in the system. 
+These examples are obviously just for demonstration, when you're actually working on applications, several things are likely going to be different. For one, you're going to have a more complicated policy, you'll be working in higher dimensions, and you may have more than one moving part/ agent in the system. 
 
 Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has some great [reachability tutorials][]{:target="_blank"} there as well.
 
