@@ -147,7 +147,85 @@ That being said, most reachability problems will involve navigating some physica
 
 ## In two (simple) dimensions...
 
-Here is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
+Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
+
+<span style="color:limegreen">NOTE : </span> This example was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also ignore the code blocks if you aren't interested in the implementation aspect, the underlying logic is the same.
+
+
+
+[tutorial_example1.m](https://github.com/rvl-lab-utoronto/backwards-reachability/blob/master/tutorial_example1.m){:target="_blank"}
+
+
+Here we setup the experiment by defining a grid, an initial set of states, and set the time for which we will run the simulation.
+
+```matlab
+%% Grid
+grid_min = [-5; -5; -pi]; % Lower corner of computation domain
+grid_max = [5; 5; pi];    % Upper corner of computation domain
+N = [41; 41; 41];         % Number of grid points per dimension
+pdDims = 3;               % 3rd dimension is periodic
+g = createGrid(grid_min, grid_max, N, pdDims);
+% Use "g = createGrid(grid_min, grid_max, N);" if there are no periodic
+% state space dimensions
+
+%% initial set
+R = 1;
+% data0 = shapeCylinder(grid,ignoreDims,center,radius)
+% making the inital shape 
+data0 = shapeCylinder(g, 3, [0; 0; 0], R);
+% also try shapeRectangleByCorners, shapeSphere, etc.
+
+%% time vector
+t0 = 0;
+% changed the time from 2 seconds to 15
+tMax = 15;
+dt = 0.05;
+tau = t0:dt:tMax;
+```
+
+It is also helpful to know how to generate videos of your output to save your results.
+
+```matlab
+HJIextraArgs.makeVideo = true; % generate video of output
+% You can further customize the video file in the following ways 
+% HJIextraArgs.videoFilename:       (string) filename of video
+% HJIextraArgs.frameRate:           (int) framerate of video
+```
+
+And if you're on Ubuntu, you may have to change the video encoding method from MP4 to AVI in the `HJIPDE_solve.m` file, as, you can do that by changing 
+
+```matlab
+    % If we're making a video, set up the parameters
+    if isfield(extraArgs, 'makeVideo') && extraArgs.makeVideo
+        if ~isfield(extraArgs, 'videoFilename')
+            extraArgs.videoFilename = ...
+                [datestr(now,'YYYYMMDD_hhmmss') '.mp4'];
+        end
+        
+        vout = VideoWriter(extraArgs.videoFilename,'MPEG-4');
+```
+
+to 
+
+```matlab
+    % If we're making a video, set up the parameters
+    if isfield(extraArgs, 'makeVideo') && extraArgs.makeVideo
+        if ~isfield(extraArgs, 'videoFilename')
+            extraArgs.videoFilename = ...
+                [datestr(now,'YYYYMMDD_hhmmss') '.avi'];
+        end
+        
+        vout = VideoWriter(extraArgs.videoFilename,'Motion JPEG AVI')
+```
+
+And finally, we uncomment the code to generate a 2D slice of the original output, as it makes things simpler and easier to understand conceptually.
+
+```matlab
+% uncomment if you want to see a 2D slice
+HJIextraArgs.visualize.plotData.plotDims = [1 1 0]; %plot x, y
+HJIextraArgs.visualize.plotData.projpt = [0]; %project at theta = 0
+HJIextraArgs.visualize.viewAngle = [0,90]; % view 2
+```
 
 In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
 
@@ -155,6 +233,8 @@ You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms te
 
 Example 1: 
 ![Reach](https://i.imgur.com/OPUjO6G.gif)
+
+![New](https://i.imgur.com/qFN3xU3.gif)
 
 ## Okay, but...
 
