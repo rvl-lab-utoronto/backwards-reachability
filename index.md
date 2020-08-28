@@ -172,9 +172,19 @@ There are two main things that determine the transformation of the reachable set
 
 ### What do we mean by policy?
 
-Typically in reinforcement learning, we think of policies as a **function**, as in, given a state, it picks *exactly one* action to take. For the purposes of this project, that is not the case. Here we think of policies simply as **_restrictions placed on the agents movement through the configuration space_**. A policy could be "stay at least two feet away from the walls", such a policy would forbid picking an action that gets you too close to a wall in the environment, but otherwise doesn't choose one action over another.
+The word policy depends on context. 
 
-The example above has no meaningful policy. Any action in the action space is allowed, so the dynamics are the only meaningful limitation, hence the set grows sharply in all directions, limited only by the speed of the car and its turning radius.
+Typically in reinforcement learning, we think of policies as a **function**, as in, given a state, it picks *exactly one* action to take. 
+
+In reachability analysis, what is typically meant by policy is a [*bang bang policy*][]{:target="_blank"}, which essentially means you go full speed in the optimal direction. It's called bang bang because it switches abruptly between (usually) two states, such as go left and go right.
+
+For the purposes of this project, policy can mean either of those things. Here we think of policies simply as **_restrictions placed on the agents movement through the configuration space_**. 
+
+A policy could be "stay at least two feet away from the walls", such a policy would forbid picking an action that gets you too close to a wall in the environment, but otherwise doesn't choose one action over another. The restriction may be "use a heuristic to compute a reward for each possible action, and pick the action with the highest reward (ties can be broken randomly)", this is a restriction that narrows down your options to exactly one for each state, and therefore results in a function. 
+
+The example above has no meaningful policy. Any action in the action space is allowed, so the dynamics are the only restriction, hence the set grows sharply in all directions, limited only by the speed of the car and its turning radius.
+
+[*bang bang policy*]: https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control#Bang%E2%80%93bang_solutions_in_optimal_control
 
 ## Different Policies?
 
@@ -187,7 +197,7 @@ As you can see, it gets us a very different reachable set. For one, this policy 
 
 In example 1, there are many (technically infinitely many) actions the policy could choose;  For example: "go right", "go left", "go a little bit left", if the dynamics allow it, even ["turn right to go left"][]{:target="_blank"}
 
-### Noise / Disturbance 
+## Noise / Disturbance 
 
 Something else you might notice if you look closely at example 2 is that the boundary of the set gets "smoother" with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter.
 
@@ -213,14 +223,14 @@ The unsatisfying answer is that for this project, we're focused on extrapolating
 
 ### The same, really?
 
-It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it. It continues to surprise me to this day. It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
+It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it,and frankly it continues to surprise me to this day. It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
 
 [*Crazy*, I know.][]{:target="_blank"}
 
 [*Crazy*, I know.]: https://i.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif
 
 
-Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems.
+Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems regarding safety critical systems.
 
 ### If they're the same, what's the difference?
 
@@ -251,7 +261,7 @@ Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has s
 
 # Conclusion 
 
-I hope by this point you have a basic understanding of what this problem is, and why it's difficult. The papers linked to in the resources section paint a much more detailed picture, especially when it comes to the math, and the implementation of the math. I avoided here on purpose, showing someone the math for something, before giving them a high level explanation of what the math is describing can often be counterproductive. 
+I hope by this point you have a basic understanding of what this problem is, and why it's difficult. The papers linked to in the resources section paint a much more detailed picture, especially when it comes to the math, and the implementation of the math. I avoided that here on purpose, as showing someone the math for something before giving them a high level conceptual explanation of what the math is describing can often be counterproductive. 
 
 But now, dear reader, you are ready. You should have a much easier (and frankly much saner) time reading through the literature on this topic, and making progress on this very cool and very interesting problem. 
 
