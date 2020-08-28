@@ -49,11 +49,13 @@ g = createGrid(grid_min, grid_max, N, pdDims);
 %% target set
 R = 1;
 % data0 = shapeCylinder(grid,ignoreDims,center,radius)
+% making the inital shape 
 data0 = shapeCylinder(g, 3, [0; 0; 0], R);
 % also try shapeRectangleByCorners, shapeSphere, etc.
 
 %% time vector
 t0 = 0;
+% changed the time from 2 seconds to 15
 tMax = 15;
 dt = 0.05;
 tau = t0:dt:tMax;
@@ -95,7 +97,6 @@ schemeData.uMode = uMode;
 %% If you have obstacles, compute them here
 
 %% Compute value function
-HJIextraArgs.makeVideo = true;
 
 %HJIextraArgs.visualize = true; %show plot
 HJIextraArgs.visualize.valueSet = 1;
@@ -103,6 +104,10 @@ HJIextraArgs.visualize.initialValueSet = 1;
 HJIextraArgs.visualize.figNum = 1; %set figure number
 HJIextraArgs.visualize.deleteLastPlot = true; %delete previous plot as you update
 
+HJIextraArgs.makeVideo = true; % generate video of output
+% You can further customize the video file in the following ways 
+% HJIextraArgs.videoFilename:       (string) filename of video
+% HJIextraArgs.frameRate:           (int) framerate of video
 HJIextraArgs.visualize.xTitle = 'x axis';
 HJIextraArgs.visualize.yTitle = 'y axis';
 
