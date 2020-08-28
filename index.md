@@ -134,13 +134,65 @@ Reachability formalizes the idea of
 
 A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubick's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
+
 ![Rubicks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
 
-Here is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. <br />
-You can read more about a Dubin's Car in Steve LaValle's [PLanning Algorithms textbook][]{:target="_blank"}
+That being said, most reachability problems will involve navigating some physical space.
 
+Here is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
+
+In this example, the green box represents the set of all possible initial positions, and as time passes, the blue "box" representing the set of all points reachable by starting from somewhere in the green box grows. So when **t = N seconds**, the blue box represents all the points you could possibly reach in **N seconds**, if you started at somewhere in the green box. 
+
+Example 1: 
 ![Reach](https://i.imgur.com/OPUjO6G.gif)
 
+But this example just begs the question **"How exactly does the set grow with respect to time?"** <br /> (You might even question the assumption that the set should always grow ( which it does *not* )).
+
+There are two main things that determine the transformation of the reachable set with respect to time. The **_dynamics_** of the system, and the **_policy_**. <br />
+(Again, you may interject with "Isn't the policy technically just a part of the dynamics?" and in a sense, yes, that's a perfectly valid way to think about it but for the purposes of this project it is useful to treat them as separate)
+
+Typically in reinforcement learning, we think of policies as a **function**, as in, given a state, it picks *exactly one* action to take. For the purposes of this project, that is not the case. Here we think of policies simply as **_restrictions placed on the agents movement through the configuration space_**. A policy could be "stay at least two feet away from the walls", such a policy would forbid picking an action that gets you too close to a wall in the environment, but otherwise doesn't choose one action over another.
+
+The example above has no meaningful policy. Any action in the action space is allowed, so the dynamics are the only meaningful limitation, hence the set grows sharply in all directions, limited only by the speed of the car and its turning radius.
+
+Here is another example where the policy is "go straight" (or "don't turn").
+
+Example 2: 
+![WithPolicy](https://i.imgur.com/ZDNcL7T.gif)
+
+As you can see, it gets us a very different reachable set. For one, this policy **_is_ a function**, meaning that given a state, it only ever returns one action; i.e. Go one step backwards in the x direction from wherever you currently are.
+
+In example 1, there are many (technically infinitely many) actions the policy could choose;  For example: "go right", "go left", "go a little bit left", if the dynamics allow it, even ["turn right to go left"][]{:target="_blank"}
+
+Something else you might notice if you look closely at example 2 is that the boundary of the set gets "smoother" with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter.
+
+This brings me to my next point, which is that one can also leave the policy constant and change the dynamics, which is why it's useful to think of them as separate. 
+
+In example 3, the policy is simply "always turn right", in example 4, its the exact same policy, but with a lot more noise.
+
+Example 3: 
+
+![swirly](https://i.imgur.com/B8tjlmn.gif)
+
+Example 4: Lots of noise
+
+![damped_swirly](https://i.imgur.com/xAugfTf.gif)
+
+After this, you can start messing around to get a feel of what's possible with the toolboxes. Here's a personal favorite.
+
+Example ???:
+
+![crazzy](https://i.imgur.com/ETmNGj7.gif)
+
+These examples are obviously just for demonstration, when you're actually working on applications, several things are likely going to be different. For one, you're going to have a more complicated policy, you may be working in higher dimensions, and you may have more than one moving part in the system. 
+
+Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has some great [reachability tutorials][]{:target="_blank"} there as well.
+
+
+![3d](https://bit.ly/32A9AQi)
+
+
+You can read more about a Dubin's Car in Steve LaValle's [PLanning Algorithms textbook][]{:target="_blank"}
 
 
 
@@ -148,8 +200,9 @@ You can read more about a Dubin's Car in Steve LaValle's [PLanning Algorithms te
 [Dubin's Car]: https://gieseanw.wordpress.com/2012/10/21/a-comprehensive-step-by-step-tutorial-to-computing-dubins-paths/
 
 [PLanning Algorithms textbook]: http://planning.cs.uiuc.edu/node657.html#sec:wheeled
-
-
+["turn right to go left"]: https://youtu.be/-7Ra1LMYphM
+[Sylvia Herbert's website]: http://sylviaherbert.com/
+[reachability tutorials]: http://sylviaherbert.com/reachability-decomposition
 Links
 -----
 
