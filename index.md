@@ -110,7 +110,7 @@
   1. Clone the [optimized_dp][]{:target="_blank"} repo and follow the instructions in the readme
   2. You'll need to install [HeteroCL][]{:target="_blank"} library as well (the virtual env comes in handy here)
   3. Define your problem in the `user_definer.py` and then run `solver.py`. <br />
-    NOTE: The `solver.py` file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :sweat:
+    NOTE: The `solver.py` file launches a web browser to plot the result and it may be unable to do so if you run it from an integrated terminal like in VSCode. It's really tragic, but you gotta open a normal terminal and run it there :(
 
   As mentioned before, this is still a work in progress so be prepared to have things not work exactly and to experiment!
 
@@ -263,7 +263,7 @@ I don't know much about partial differential equations, lagrangian mechanics or 
 
 > "It might be well for all of us to remember that, while differing widely in the various little bits we know, in our infinite ignorance we are all equal." <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Karl Popper, Conjectures and Refutations
 
-Good luck :wink:
+Good luck!
 
 
 
