@@ -83,7 +83,7 @@
 
   - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
-    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like '<shapeRectangleByCorners(grid, [-1 -inf], [1, inf])>'.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
+    <span style="color:limegreen"> *Sylvia* :</span> Let's say I have a rectangular target set in position space (from -1 to 1), but my state space contains position x and velocity v.  I would make something like `<shapeRectangleByCorners(grid, [-1 -inf], [1, inf])>`.  I'm essentially saying that this set is between -1 and 1 in position space, and through all of velocity space.  So that essentially ignores the velocity dimension.  If you're ever curious about the shaping functions you can just open the function and take a look--they're generally pretty simple.
 
 
   - <span style="color:dodgerblue"> *Ali* : </span> How do I combine shapes? You say in your HJR paper that "The obstacles should then be combined in a cell structure and set to HJIextraArgs.obstacles" I'm not sure how to do this.
