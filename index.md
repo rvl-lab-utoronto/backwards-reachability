@@ -68,7 +68,7 @@
 
   [toolbox]: https://www.cs.ubc.ca/~mitchell/ToolboxLS/
 
-  If you don't know how to install toolboxes in MATLAB you can find [basic MATLAB tutorials here][]{:target="_blank"} but I think you'd be better off just asking someone who knows MATLAB to spend 30 minutes showing you the basics.
+  If you don't know how to install toolboxes in MATLAB you can find [basic MATLAB tutorials here][]{:target="_blank"} but we think you'd be better off just asking someone who knows MATLAB to spend 30 minutes showing you the basics.
 
   Steps:
 
@@ -294,15 +294,12 @@ else
 end
 ```
 
-## Noise / Disturbance 
 
-Something else you might notice if you look closely at example 2 is that the boundary of the set gets "smoother" with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter.
-
-This brings me to my next point, which is that one can also leave the policy constant and change the dynamics, which is why it's useful to think of them as separate. 
+This brings us to our next point, which is that one can also leave the policy constant and change the dynamics, which is why it's useful to think of them as separate. 
 
 ## Different Dynamics?
 
-In example 3, the policy is simply "always turn right", in example 4, its the exact same policy, but with a lot more noise.
+Example 3 and 4 have the the exact same policy, which is "always turn right". What makes example 4 different, is the added **noise**.
 
 Example 3: 
 
@@ -328,13 +325,15 @@ else
   error('Unknown uMode!')
 end
 ```
-### Noise / Disturbance continued 
+## Noise / Disturbance 
 
-Now let's change the dynamics by adding more noise. This causes the reachable set to constantly shrink because you now have to account for the **_uncertainty_ of noise**. 
+Something else you might notice if you look closely at example 3 is that the set gets "smoother" and smaller with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter
+
+So let us change the dynamics by adding more noise. This causes the reachable set to constantly shrink because you now have to account for the **_uncertainty_ of noise**. 
 
 As in, you look at the points near the boundary of your original reachable set and say "well if my calculations may be a little bit off this point might actually lie _outside_ the boundary. So let me only include the points that are _well within_ the boundary of my reachable set." 
 
-If you are forced to make this truncation at each time-step _and_ your policy is narrow in the sense that the reachable area stays constant with time, then your reachable set will shrink and eventually become the empty set.
+If you are forced to make this truncation at each time-step _and_  your policy is narrow in the sense that the reachable area stays constant with time, then your reachable set will shrink and eventually become the empty set.
 
 Example 4:
 
