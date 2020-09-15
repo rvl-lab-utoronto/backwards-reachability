@@ -1,68 +1,63 @@
 
-
-#  1. <a name='backwards-reachability:-a-tutorial'></a>Backwards Reachability: A Tutorial
-
 ___
 
-Authors: [Ali Kuwajerwala][]{:target="_blank"}, Cathlyn Chen <br /> 
-Affiliation: [Robot Vision and Learning Lab][]{:target="_blank"} at the University of Toronto <br />
-Date Published: August 31, 2020
+**Authors:** [Ali Kuwajerwala][]{:target="_blank"}, Cathlyn Chen <br /> 
+**Affiliation:** [Robot Vision and Learning Lab][]{:target="_blank"} at the University of Toronto <br />
+**Date Published:** August 31, 2020
 
 
 [Ali Kuwajerwala]: https://alik-git.github.io/
 [Robot Vision and Learning Lab]: https://rvl.cs.toronto.edu/
-___
-
-  This is a project about reachability / safety analysis for safety critical dynamic systems. 
 
 ___
+
+## Table of Contents:
   
-## Table of Contents 
+<!-- TOC -->
 
-<!-- vscode-markdown-toc -->
-  1. [Backwards Reachability: A Tutorial](#backwards-reachability:-a-tutorial)
-  2. [Prerequisites](#prerequisites)
-  3. [Resources](#resources)
-  4. [Overview of Available Toolboxes](#overview-of-available-toolboxes)
-  * 4.1. [Level Set Method Toolbox](#level-set-method-toolbox)
-  * 4.2. [HelperOC Toolbox](#helperoc-toolbox)
-  * 4.3. [BEACLS](#beacls)
-  * 4.4. [Optimized DP](#optimized-dp)
-  5. [Toolbox Setup](#toolbox-setup)
-  * 5.1. [HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]](#helperoc-toolbox-(by-sylvia-herbert,-mo-chen-and-others)-<br-/>-[*matlab*-])
-    * 5.1.1. [Short FAQ:](#short-faq:)
-  * 5.2. [Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]](#optimized-dp-(by-mo-chen-and-others)-<br-/>-[*python*-interface,-*heterocl*-implementation-])
-  6. [Reachability Notes](#reachability-notes)
-  7. [What is Reachability?](#what-is-reachability?)
-  * 7.1. [Configuration Space?](#configuration-space?)
-  8. [In two (simple) dimensions...](#in-two-(simple)-dimensions...)
-  * 8.1. [Example 1 Code](#example-1-code)
-  9. [Okay, but...](#okay,-but...)
-  * 9.1. [What determines the set?](#what-determines-the-set?)
-  * 9.2. [What do we mean by **Policy**?](#what-do-we-mean-by-**policy**?)
-  10. [Different Policies?](#different-policies?)
-  * 10.1. [Example 2 Code](#example-2-code)
-  11. [Different Dynamics?](#different-dynamics?)
-  * 11.1. [Example 3 Code](#example-3-code)
-  12. [Noise / Disturbance](#noise-/-disturbance)
-  * 12.1. [Example 4 Code](#example-4-code)
-  13. [But you said *backward*...](#but-you-said-*backward*...)
-  * 13.1. [The same, really?](#the-same,-really?)
-    * 13.1.1. [What is physics, anyways? A short detour](#what-is-physics,-anyways?-a-short-detour)
-    * 13.1.2. [Back to reachability...](#back-to-reachability...)
-  * 13.2. [If theyre the same, then whats the difference?](#if-theyre-the-same,-then-whats-the-difference?)
-  14. [You seem to be able compute these sets just fine. Whats the problem then?](#you-seem-to-be-able-compute-these-sets-just-fine.-whats-the-problem-then?)
-  * 14.1. [Future Plans](#future-plans)
-  15. [What now?](#what-now?)
-  16. [Real Life Applications](#real-life-applications)
-  17. [Conclusion](#conclusion)
+1. [1. Backwards Reachability](#1-backwards-reachability)
+   1. [1.1. Prerequisites](#11-prerequisites)
+   2. [1.2. Resources](#12-resources)
+   3. [1.3. Overview of Available Toolboxes](#13-overview-of-available-toolboxes)
+      1. [1.3.1. Level Set Method Toolbox](#131-level-set-method-toolbox)
+      2. [1.3.2. HelperOC Toolbox](#132-helperoc-toolbox)
+      3. [1.3.3. BEACLS](#133-beacls)
+      4. [1.3.4. Optimized DP](#134-optimized-dp)
+   4. [1.4. Toolbox Setup](#14-toolbox-setup)
+      1. [1.4.1. HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]](#141-helperoc-toolbox-by-sylvia-herbert-mo-chen-and-others-br--matlab)
+         1. [1.4.1.1. Short FAQ:Q:](#1411-short-faqq)
+      2. [1.4.2. Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]](#142-optimized-dp-by-mo-chen-and-others-br--python-interface-heterocl-implementation)
+2. [2. Reachability Notes](#2-reachability-notes)
+   1. [2.1. What is Reachability?](#21-what-is-reachability)
+      1. [2.1.1. Configuration Space?](#211-configuration-space)
+   2. [2.2. In two (simple) dimensions...](#22-in-two-simple-dimensions)
+      1. [2.2.1. Example 1 Code](#221-example-1-code)
+   3. [2.3. Okay, but...](#23-okay-but)
+      1. [2.3.1. What determines the set?](#231-what-determines-the-set)
+      2. [2.3.2. What do we mean by **Policy**?](#232-what-do-we-mean-by-policy)
+   4. [2.4. Different Policies?](#24-different-policies)
+      1. [2.4.1. Example 2 Code](#241-example-2-code)
+   5. [2.5. Different Dynamics?](#25-different-dynamics)
+      1. [2.5.1. Example 3 Code](#251-example-3-code)
+   6. [2.6. Noise / Disturbance](#26-noise--disturbance)
+      1. [2.6.1. Example 4 Code](#261-example-4-code)
+   7. [2.7. But you said *backward*...](#27-but-you-said-backward)
+      1. [2.7.1. The same, really?](#271-the-same-really)
+         1. [2.7.1.1. What is physics, anyways? A short detour](#2711-what-is-physics-anyways-a-short-detour)
+         2. [2.7.1.2. Back to reachability...](#2712-back-to-reachability)
+      2. [2.7.2. If they're the same, then what's the difference?](#272-if-theyre-the-same-then-whats-the-difference)
+   8. [2.8. You seem to be able compute these sets just fine. What's the problem then?](#28-you-seem-to-be-able-compute-these-sets-just-fine-whats-the-problem-then)
+      1. [2.8.1. Future Plans](#281-future-plans)
+   9. [2.9. What now?](#29-what-now)
+   10. [2.10. Real Life Applications](#210-real-life-applications)
+3. [3. Conclusion](#3-conclusion)
 
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
+<!-- /TOC -->
 ___
+
+# 1. Backwards Reachability
+<a id="markdown-backwards-reachability" name="backwards-reachability"></a>
+
   In the context of a dynamic system, the **backwards reachable set** (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. If one can efficiently compute such sets, there is potential to use them to make safety guarantees for various autonomous systems, by determining whether some potential unsafe state will, in principle, ever be reached by a given policy. 
   
   In this tutorial, we describe the tools currently available to tackle this problem and how to use them. We also talk briefly about the different ways to think about the problem, from our own experience and time spent working on it.
@@ -76,7 +71,8 @@ ___
 
 ___
 
-##  2. <a name='prerequisites'></a>Prerequisites 
+## 1.1. Prerequisites
+<a id="markdown-prerequisites" name="prerequisites"></a>
 
   You want to be comfortable with these concepts before reading this tutorial:
 
@@ -101,7 +97,8 @@ ___
 
 [Reinforcement Learning Basics]: https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
 
-##  3. <a name='resources'></a>Resources     
+## 1.2. Resources
+<a id="markdown-resources" name="resources"></a>
 
 Helpful reading material if you'd like to dive deeper after going through this tutorial:
 
@@ -135,24 +132,29 @@ Helpful reading material if you'd like to dive deeper after going through this t
 
 ___
     
-##  4. <a name='overview-of-available-toolboxes'></a>Overview of Available Toolboxes
+## 1.3. Overview of Available Toolboxes
+<a id="markdown-overview-of-available-toolboxes" name="overview-of-available-toolboxes"></a>
 
 There are several pieces of software (often referred to as toolboxes) available to help with the computations involved in reachability analysis, each with its own pros and cons.
 
-###  4.1. <a name='level-set-method-toolbox'></a>Level Set Method Toolbox
+### 1.3.1. Level Set Method Toolbox
+<a id="markdown-level-set-method-toolbox" name="level-set-method-toolbox"></a>
 The aptly named  Level Set Method [toolbox][]{:target="_blank"} (2004) by [Ian Mitchell][]{:target="_blank"} is a general purpose MATLAB toolbox used to compute solutions to a wide range of partial differential equations using [level set methods][]{:target="_blank"}. As solving partial differential equations is crucial to computing reachable sets of dynamic systems, this toolbox serves as the "back-end" for that task. It is also by far the most thoroughly documented, complete with a lavish [140 page][]{:target="_blank"} user manual.
 
-###  4.2. <a name='helperoc-toolbox'></a>HelperOC Toolbox
+### 1.3.2. HelperOC Toolbox
+<a id="markdown-helperoc-toolbox" name="helperoc-toolbox"></a>
 
 Another MATLAB toolbox named [helperOC][]{:target="_blank"} by [Sylvia Herbert][]{:target="_blank"}, [Mo Chen][]{:target="_blank"}, [Somil Bansal][]{:target="_blank"} and others, functions essentially as a wrapper for the prior toolbox, focusing solely reachability tasks. It is also well documented, with a [paper][]{:target="_blank"} and a [tutorial file][]{:target="_blank"}.
 
 The drawback of these two toolboxes is their (relatively) slow speed and lack of GPU support. More recent tools overcome those issues, but lack thorough documentation due to their infancy. 
 
-###  4.3. <a name='beacls'></a>BEACLS
+### 1.3.3. BEACLS
+<a id="markdown-beacls" name="beacls"></a>
 
 The first one of these is [BEACLS][]{:target="_blank"} written by [Ken Tanabe][]{:target="_blank"}, [Mo Chen][]{:target="_blank"} and others. BEACLS uses the same methods as the prior toolboxes, but is written in C++ with CUDA, which allows the use of GPUs to perform the same computations as before up to 200x faster. The only documentation currently available is installation notes, however the structure of the project is quite similar to helperOC and LSM, so the knowledge of how to work with those toolboxes has significant overlap here.
 
-###  4.4. <a name='optimized-dp'></a>Optimized DP
+### 1.3.4. Optimized DP
+<a id="markdown-optimized-dp" name="optimized-dp"></a>
 
 Finally the most recent toolbox for reachability analysis is still under development by [Mo Chen][]{:target="_blank"}, called [optimized_dp][]{:target="_blank"}. It uses [heteroCL][]{:target="_blank"}, which is programming infrastructure that provides a clean abstraction to work with complex hardware specific algorithms. It runs over 100x faster (without GPU support) than helperOC , and its performance is comparable to that of BEACLS (which uses GPUs). 
 
@@ -177,11 +179,13 @@ It has minimal documentation at the time of writing this tutorial, but it is wor
 
 [heteroCL]: http://heterocl.csl.cornell.edu/
 
-##  5. <a name='toolbox-setup'></a>Toolbox Setup
+## 1.4. Toolbox Setup
+<a id="markdown-toolbox-setup" name="toolbox-setup"></a>
 
 We used the helperOC toolbox and (briefly) the Optimized DP toolbox while working on this project, and have complied some helpful setup information below. 
 
-###  5.1. <a name='helperoc-toolbox-(by-sylvia-herbert,-mo-chen-and-others)-<br-/>-[*matlab*-]'></a>HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
+### 1.4.1. HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
+<a id="markdown-helperoc-toolbox-by-sylvia-herbert%2C-mo-chen-and-others-%3Cbr-%2F%3E-%5B*matlab*-%5D" name="helperoc-toolbox-by-sylvia-herbert%2C-mo-chen-and-others-%3Cbr-%2F%3E-%5B*matlab*-%5D"></a>
 
   This toolbox uses [Ian Mitchell][]{:target="_blank"}'s Level Set Method [toolbox][]{:target="_blank"} to compute backwards reachable sets (BRS) in MATLAB. Currently it is the most well documented and easiest to use.
 
@@ -201,7 +205,8 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
   [Sylvia Herbert]: http://sylviaherbert.com/ 
   
-####  5.1.1. <a name='short-faq:'></a>Short FAQ:Q: 
+#### 1.4.1.1. Short FAQ:Q:
+<a id="markdown-short-faq%3Aq%3A" name="short-faq%3Aq%3A"></a>
 
   - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
@@ -222,7 +227,8 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
     <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of theta) the initial positions that will enter the target set in the time horizon are different. 
 
-###  5.2. <a name='optimized-dp-(by-mo-chen-and-others)-<br-/>-[*python*-interface,-*heterocl*-implementation-]'></a>Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]
+### 1.4.2. Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]
+<a id="markdown-optimized-dp--by-mo-chen-and-others-%3Cbr-%2F%3E--%5B*python*-interface%2C-*heterocl*-implementation-%5D" name="optimized-dp--by-mo-chen-and-others-%3Cbr-%2F%3E--%5B*python*-interface%2C-*heterocl*-implementation-%5D"></a>
 
   This project is currently in a work in progress and does not have comprehensive tutorials as of yet. So there's a fair amount of trial and error here, but it's most likely the way forward in the long term.
 
@@ -248,7 +254,8 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
 ___
 
-#  6. <a name='reachability-notes'></a>Reachability Notes 
+# 2. Reachability Notes
+<a id="markdown-reachability-notes" name="reachability-notes"></a>
 
 This part of the tutorial is intended to serve as an informal introduction to the various concepts of reachability analysis for those unfamiliar with it. Think of it as a tour of the landscape. 
 
@@ -256,13 +263,15 @@ A comprehensive and thorough explanation of reachability analysis, complete with
 
 As the RVL Lab continues to pursue projects in this area, we will update this page, and this section accordingly.
 
-##  7. <a name='what-is-reachability?'></a>What is Reachability?
+## 2.1. What is Reachability?
+<a id="markdown-what-is-reachability%3F" name="what-is-reachability%3F"></a>
 
 Reachability formalizes the idea of 
 
 **"what states in the _configuration space_ can you reach as time passes".**
 
-###  7.1. <a name='configuration-space?'></a>Configuration Space?
+### 2.1.1. Configuration Space?
+<a id="markdown-configuration-space%3F" name="configuration-space%3F"></a>
 
 A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubik's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
@@ -271,7 +280,8 @@ A mistake I made when first trying to understand this was that I thought about t
 
 That being said, most reachability problems will involve navigating some physical space.
 
-##  8. <a name='in-two-(simple)-dimensions...'></a>In two (simple) dimensions...
+## 2.2. In two (simple) dimensions...
+<a id="markdown-in-two-simple-dimensions..." name="in-two-simple-dimensions..."></a>
 
 Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
 
@@ -283,7 +293,8 @@ Example 1:
 
 You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}
 
-###  8.1. <a name='example-1-code'></a>Example 1 Code
+### 2.2.1. Example 1 Code
+<a id="markdown-example-1-code" name="example-1-code"></a>
 
 The example above was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also simply ignore the code blocks if you aren't interested in the implementation aspect as the theory doesn't depend on it.
 
@@ -362,16 +373,19 @@ HJIextraArgs.visualize.viewAngle = [0,90]; % view 2
 ```
 
 
-##  9. <a name='okay,-but...'></a>Okay, but...
+## 2.3. Okay, but...
+<a id="markdown-okay%2C-but..." name="okay%2C-but..."></a>
 
 This example just begs the question **"How exactly does the set grow with respect to time?"**. You might even question the assumption that the set should always grow ( which it does *not* ).
 
-###  9.1. <a name='what-determines-the-set?'></a>What determines the set?
+### 2.3.1. What determines the set?
+<a id="markdown-what-determines-the-set%3F" name="what-determines-the-set%3F"></a>
 
 There are two main things that determine the transformation of the reachable set with respect to time. The **dynamics** of the system, and the **policy**. <br />
 (Again, you may interject with "Isn't the policy technically just a part of the dynamics?" and in a sense, yes, that's a perfectly valid way to think about it, but for the purposes of this project it is useful to treat them as separate).
 
-###  9.2. <a name='what-do-we-mean-by-**policy**?'></a>What do we mean by **Policy**?
+### 2.3.2. What do we mean by **Policy**?
+<a id="markdown-what-do-we-mean-by-**policy**%3F" name="what-do-we-mean-by-**policy**%3F"></a>
 
 The word policy here depends on context. Typically in reinforcement learning, we think of policies as a **function** mapping _perceived states of the environment_ to **actions**. It represents the agent's **strategy**. As in, given a state (a certain situation), the policy picks an action to take, typically the one that maximizes the long term reward.
 
@@ -387,7 +401,8 @@ The example above has no meaningful policy. Any action in the action space is al
 
 [bang bang policy]: https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control#Bang%E2%80%93bang_solutions_in_optimal_control
 
-##  10. <a name='different-policies?'></a>Different Policies?
+## 2.4. Different Policies?
+<a id="markdown-different-policies%3F" name="different-policies%3F"></a>
 
 Here is another example where the policy is "go straight" (or "don't turn").
 
@@ -403,7 +418,8 @@ In example 1, there are many (technically infinitely many) actions the policy co
 
 [here]: https://en.wikipedia.org/wiki/Drifting_(motorsport)
 
-###  10.1. <a name='example-2-code'></a>Example 2 Code
+### 2.4.1. Example 2 Code
+<a id="markdown-example-2-code" name="example-2-code"></a>
 
 In addition to the code from example 1, we simply change how the policy is computed in the file `optCtrl.m`. The original code is commented out and we add our changes below.
 
@@ -427,7 +443,8 @@ end
 
 This brings us to our next point, which is that one can also leave the policy constant and change the dynamics, which is why it's useful to think of them as separate. 
 
-##  11. <a name='different-dynamics?'></a>Different Dynamics?
+## 2.5. Different Dynamics?
+<a id="markdown-different-dynamics%3F" name="different-dynamics%3F"></a>
 
 Example 3 and 4 have the the exact same policy, which is "always turn right". What makes example 4 different, is the added **noise**.
 
@@ -435,7 +452,8 @@ Example 3:
 
 ![swirly](https://i.imgur.com/cdVBq7V.gif)
 
-###  11.1. <a name='example-3-code'></a>Example 3 Code 
+### 2.5.1. Example 3 Code
+<a id="markdown-example-3-code" name="example-3-code"></a>
 
 
 
@@ -455,7 +473,9 @@ else
   error('Unknown uMode!')
 end
 ```
-##  12. <a name='noise-/-disturbance'></a>Noise / Disturbance 
+
+## 2.6. Noise / Disturbance
+<a id="markdown-noise-%2F-disturbance" name="noise-%2F-disturbance"></a>
 
 Something else you might notice if you look closely at example 3 is that the set gets "smoother" and smaller with time, this is because of noise (tiny disturbances in your input and output that inevitably affect your system in the real world). You can add more or less noise to the dynamics in either toolbox as a parameter
 
@@ -469,7 +489,8 @@ Example 4:
 
 ![damped_swirly](https://i.imgur.com/bXLgLh2.gif)
 
-###  12.1. <a name='example-4-code'></a>Example 4 Code 
+### 2.6.1. Example 4 Code
+<a id="markdown-example-4-code" name="example-4-code"></a>
 
 In the `tutorial.m` file, there is a parameter you can change to add gaussian noise to the system in each state dimension separately. 
 
@@ -486,17 +507,20 @@ HJIextraArgs.addGaussianNoiseStandardDeviation = [0; 0; 0.5];
 ```
 
 
-##  13. <a name='but-you-said-*backward*...'></a>But you said *backward*...
+## 2.7. But you said *backward*...
+<a id="markdown-but-you-said-*backward*..." name="but-you-said-*backward*..."></a>
 
 At this point you may be wondering **"Okay, but why is it called _backward_ reachability?"**
 
-The trivial answer is that for this project, we're focused on extrapolating backwards from unsafe states to see if we ever reach them, which grants us insights into the safety of the system in question. However there is another much deeper answer, which is that backwards and forward reachability are symmetrical concepts. So the explanations of forward reachability overlap almost perfectly with the explanations of backwards reachability.
+The trivial answer is that for this project, we're focused on extrapolating backwards from unsafe states to see if we ever reach them, which grants us insights into the safety of the system in question. However there is another much deeper answer, which is that backwards and forward reachability are symmetrical concepts. So the explanations of forward reachability overlap perfectly with the explanations of backwards reachability.
 
-###  13.1. <a name='the-same,-really?'></a>The same, really?
+### 2.7.1. The same, really?
+<a id="markdown-the-same%2C-really%3F" name="the-same%2C-really%3F"></a>
 
 It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it,and frankly it continues to surprise me to this day. 
 
-####  13.1.1. <a name='what-is-physics,-anyways?-a-short-detour'></a>What is physics, anyways? A short detour
+#### 2.7.1.1. What is physics, anyways? A short detour
+<a id="markdown-what-is-physics%2C-anyways%3F-a-short-detour" name="what-is-physics%2C-anyways%3F-a-short-detour"></a>
 
 PS: It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
 
@@ -508,11 +532,13 @@ PPPS: Other than the trivial example of thermal equilibrium, there is at least o
 
 [*Crazy*, I know.]: https://i.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif
 
-####  13.1.2. <a name='back-to-reachability...'></a>Back to reachability...
+#### 2.7.1.2. Back to reachability...
+<a id="markdown-back-to-reachability..." name="back-to-reachability..."></a>
 
 Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems regarding safety critical systems.
 
-###  13.2. <a name='if-theyre-the-same,-then-whats-the-difference?'></a>If theyre the same, then whats the difference?
+### 2.7.2. If they're the same, then what's the difference?
+<a id="markdown-if-they're-the-same%2C-then-what's-the-difference%3F" name="if-they're-the-same%2C-then-what's-the-difference%3F"></a>
 
 You can think about forward reachability as determining to *what* states in the *future* is your current policy going to take you, and whether those states are good or bad.
 
@@ -522,7 +548,8 @@ From a computation perspective, its pretty much identical.
 
 [symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
 
-##  14. <a name='you-seem-to-be-able-compute-these-sets-just-fine.-whats-the-problem-then?'></a>You seem to be able compute these sets just fine. Whats the problem then?
+## 2.8. You seem to be able compute these sets just fine. What's the problem then?
+<a id="markdown-you-seem-to-be-able-compute-these-sets-just-fine.-what's-the-problem-then%3F" name="you-seem-to-be-able-compute-these-sets-just-fine.-what's-the-problem-then%3F"></a>
 
 As I'm sure you've noticed, this tutorial deals with very simple dynamic systems. Even computing the reachable sets of a simple 2D Dubin's car involves solving a partial differential equation, known as the Hamiltonian. As the systems get more complex, so does the math.
 
@@ -530,7 +557,8 @@ All the toolboxes mentioned above use a grid based system to approximate the sys
 
 The newer toolboxes exploit the recent advances in computation power, especially with GPUs, to solve these equations hundreds of times faster than the MATLAB toolbox I used for these examples. While that greatly increases the systems we can compute reachability for, solving the equations that describe most real world systems, especially in real time, is unfortunately still very much "out of reach" at the moment. (ha ha ha)
 
-###  14.1. <a name='future-plans'></a>Future Plans
+### 2.8.1. Future Plans
+<a id="markdown-future-plans" name="future-plans"></a>
 
 The long term plan for this project is therefore to develop techniques / methods to bypass those problems. There are several approaches to doing this, we've briefly talked about several of them in this tutorial. Some examples are:
 
@@ -542,7 +570,8 @@ The long term plan for this project is therefore to develop techniques / methods
 
   - Leveraging new programming infrastructures / libraries / algorithms that solve partial differential equations faster to improve the performance of the current toolboxes.
 
-##  15. <a name='what-now?'></a>What now?
+## 2.9. What now?
+<a id="markdown-what-now%3F" name="what-now%3F"></a>
 
 After this, you can start messing around to get a feel of what's possible with the toolboxes. Here's a personal favorite.
 
@@ -550,7 +579,8 @@ Example 5:
 
 ![crazzy](https://i.imgur.com/ETmNGj7.gif)
 
-##  16. <a name='real-life-applications'></a>Real Life Applications 
+## 2.10. Real Life Applications
+<a id="markdown-real-life-applications" name="real-life-applications"></a>
 
 These examples are obviously just for demonstration, when you're actually working on applications, several things are likely going to be different. For one, you're going to have a more complicated policy, you'll be working in higher dimensions, and you may have more than one moving part/ agent in the system. 
 
@@ -559,7 +589,8 @@ Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has s
 
 ![3d](https://bit.ly/32A9AQi)
 
-#  17. <a name='conclusion'></a>Conclusion 
+# 3. Conclusion
+<a id="markdown-conclusion" name="conclusion"></a>
 
 I hope by this point you have a basic understanding of what this problem is, and what makes it difficult. The papers linked to in the resources section paint a much more detailed picture, and formalize the concepts touched on in this tutorial with the rigor of mathematics. Again, it is worth emphasizing that this tutorial is meant to be an informal introduction to the main ideas of reachability analysis without getting overly technical.
 

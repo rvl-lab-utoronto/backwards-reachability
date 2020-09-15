@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
-# title: [The title of your site]
-# description: [A short description of your site's purpose]
+title: 'Backwards Reachability: A Tutorial'
+description: Using reachability analysis to compute safety guarantees for safety critical dynamic systems.
 github:
   is_project_page: false
