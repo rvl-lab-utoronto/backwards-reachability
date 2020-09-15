@@ -91,20 +91,20 @@ ___
 
 There are several pieces of software (often referred to as toolboxes) available to help with the computations involved in reachability analysis, each with its own pros and cons.
 
-#### Level Set Method Toolbox
+### Level Set Method Toolbox
 The aptly named  Level Set Method [toolbox][]{:target="_blank"} (2004) by [Ian Mitchell][]{:target="_blank"} is a general purpose MATLAB toolbox used to compute solutions to a wide range of partial differential equations using [level set methods][]{:target="_blank"}. As solving partial differential equations is crucial to computing reachable sets of dynamic systems, this toolbox serves as the "back-end" for that task. It is also by far the most thoroughly documented, complete with a lavish [140 page][]{:target="_blank"} user manual.
 
-#### HelperOC Toolbox
+### HelperOC Toolbox
 
 Another MATLAB toolbox named [helperOC][]{:target="_blank"} by [Sylvia Herbert][]{:target="_blank"}, [Mo Chen][]{:target="_blank"}, [Somil Bansal][]{:target="_blank"} and others, functions essentially as a wrapper for the prior toolbox, focusing solely reachability tasks. It is also well documented, with a [paper][]{:target="_blank"} and a [tutorial file][]{:target="_blank"}.
 
 The drawback of these two toolboxes is their (relatively) slow speed and lack of GPU support. More recent tools overcome those issues, but lack thorough documentation due to their infancy. 
 
-#### BEACLS
+### BEACLS
 
 The first one of these is [BEACLS][]{:target="_blank"} written by [Ken Tanabe][]{:target="_blank"}, [Mo Chen][]{:target="_blank"} and others. BEACLS uses the same methods as the prior toolboxes, but is written in C++ with CUDA, which allows the use of GPUs to perform the same computations as before up to 200x faster. The only documentation currently available is installation notes, however the structure of the project is quite similar to helperOC and LSM, so the knowledge of how to work with those toolboxes has significant overlap here.
 
-#### Optimized DP
+### Optimized DP
 
 Finally the most recent toolbox for reachability analysis is still under development by [Mo Chen][]{:target="_blank"}, called [optimized_dp][]{:target="_blank"}. It uses [heteroCL][]{:target="_blank"}, which is programming infrastructure that provides a clean abstraction to work with complex hardware specific algorithms. It runs over 100x faster (without GPU support) than helperOC , and its performance is comparable to that of BEACLS (which uses GPUs). 
 
@@ -133,7 +133,7 @@ It has minimal documentation at the time of writing this tutorial, but it is wor
 
 We used the helperOC toolbox and (briefly) the Optimized DP toolbox while working on this project, and have complied some helpful setup information below. 
 
-- ### HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
+### HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]
 
   This toolbox uses [Ian Mitchell][]{:target="_blank"}'s Level Set Method [toolbox][]{:target="_blank"} to compute backwards reachable sets (BRS) in MATLAB. Currently it is the most well documented and easiest to use.
 
@@ -153,7 +153,7 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
   [Sylvia Herbert]: http://sylviaherbert.com/ 
   
-  ### Short FAQ: 
+  #### Short FAQ: 
 
   - <span style="color:dodgerblue"> *Ali* : </span> You make a cylinder target set and ignore the theta dimension, but there doesn't seem to be an ignore dimension option while creating other shapes? Is this only an option for cylinders?
 
@@ -174,7 +174,7 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
     <span style="color:limegreen"> *Sylvia* :</span> Great question! Let's consider a particular slice in x and y at theta = 0 (i.e. the car is pointed to the right).  If the car is to the left of the set and pointing to the right, it's headed straight for the target set (and therefore will enter the target set, making this initial state part of the reachable set).  However, if the car is to the right of the target set, it's facing away from the set and will need more time to turn around and head for the set.  Therefore, at different orientations (i.e. different slices of theta) the initial positions that will enter the target set in the time horizon are different. 
 
-- ### Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]
+### Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]
 
   This project is currently in a work in progress and does not have comprehensive tutorials as of yet. So there's a fair amount of trial and error here, but it's most likely the way forward in the long term.
 
@@ -481,6 +481,8 @@ As I'm sure you've noticed, this tutorial deals with very simple dynamic systems
 All the toolboxes mentioned above use a grid based system to approximate the system dynamics over a "chunk" / subset of the configuration space across time. A big problem here is that the size of the computation grows exponentially with respect to the number of dimensions, and real life dynamic systems tend to be quite high dimensional. It is impossible to compute their reachable sets within a reasonable amount of time. This is huge bottleneck since ideally we want to compute these sets in _real time_, let alone well in advance. This is known as the curse of dimensionality, and makes the problem totally infeasible at the moment for something like a real self driving car.
 
 The newer toolboxes exploit the recent advances in computation power, especially with GPUs, to solve these equations hundreds of times faster than the MATLAB toolbox I used for these examples. While that greatly increases the systems we can compute reachability for, solving the equations that describe most real world systems, especially in real time, is unfortunately still very much "out of reach" at the moment. (ha ha ha)
+
+### Future Plans
 
 The long term plan for this project is therefore to develop techniques / methods to bypass those problems. There are several approaches to doing this, we've briefly talked about several of them in this tutorial. Some examples are:
 
