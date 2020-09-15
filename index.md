@@ -1,6 +1,6 @@
 
 
-# Backwards Reachability: A Tutorial
+## Backwards Reachability: A Tutorial
 
 ___
 
@@ -200,7 +200,7 @@ We used the helperOC toolbox and (briefly) the Optimized DP toolbox while workin
 
 ___
 
-# Reachability Notes 
+## Reachability Notes 
 
 This part of the tutorial is intended to serve as an informal introduction to the various concepts of reachability analysis for those unfamiliar with it. Think of it as a tour of the landscape. 
 
@@ -464,7 +464,7 @@ PPPS: Other than the trivial example of thermal equilibrium, there is at least o
 
 Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems regarding safety critical systems.
 
-### If they're the same, what's the difference?
+### If theyre the same, then whats the difference?
 
 You can think about forward reachability as determining to *what* states in the *future* is your current policy going to take you, and whether those states are good or bad.
 
@@ -474,7 +474,7 @@ From a computation perspective, its pretty much identical.
 
 [symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
 
-## You seem to be able compute these sets just fine. What's the problem then?
+## You seem to be able compute these sets just fine. Whats the problem then?
 
 As I'm sure you've noticed, this tutorial deals with very simple dynamic systems. Even computing the reachable sets of a simple 2D Dubin's car involves solving a partial differential equation, known as the Hamiltonian. As the systems get more complex, so does the math.
 
@@ -511,7 +511,7 @@ Here is an example from [Sylvia Herbert's website][]{:target="_blank"} who has s
 
 ![3d](https://bit.ly/32A9AQi)
 
-# Conclusion 
+## Conclusion 
 
 I hope by this point you have a basic understanding of what this problem is, and what makes it difficult. The papers linked to in the resources section paint a much more detailed picture, and formalize the concepts touched on in this tutorial with the rigor of mathematics. Again, it is worth emphasizing that this tutorial is meant to be an informal introduction to the main ideas of reachability analysis without getting overly technical.
 
@@ -539,76 +539,4 @@ Good luck!
 [reachability tutorials]: http://sylviaherbert.com/reachability-decomposition
 
 
-<!-- 
 
-Links
------
-
-For a URL or email, just write it like this:
-
-<http://someurl>
-
-<somebbob@example.com>
-
-
-To use text for the link, write it [like this](http://someurl).
-
-You can add a *title* (which shows up under the cursor), 
-[like this](http://someurl "this title shows up when you hover").
-
-Reference Links
----------------
-
-You can also put the [link URL][1] below the current paragraph like [this][2].
-
-   [1]: http://url
-   [2]: http://another.url "A funky title"
-
-Here the text "link URL" gets linked to "http://url", and the lines showing 
-"[1]: http://url" won't show anything.
-
-
-Or you can use a [shortcut][] reference, which links the text "shortcut" 
-to the link named "[shortcut]" on the next paragraph.
-
-   [shortcut]: http://goes/with/the/link/name/text
-
-
-## Welcome to GitHub Pages
-
-
-You can use the [editor on GitHub](https://github.com/rvl-lab-utoronto/backwards-reachability/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown file(sss).
-
-### Markdown
-
-Markdown is a lightweight and easy-to- for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-```
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rvl-lab-utoronto/backwards-reachability/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out. -->
