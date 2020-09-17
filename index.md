@@ -560,7 +560,7 @@ PS: It's also important to remember that time is simply how we measure causality
 
 PPS: It is also a common misconception that the second law of thermodynamics states that entropy must always increase overtime. It actually states only that, in an isolated system, entropy can never decrease over time. For example entropy is constant once a system reaches thermal equilibrium.
 
-PPPS: Other than the trivial example of thermal equilibrium, there is at least one other instance of entropy "never increasing", which is within the event horizon of an isolated black hole. In 1972, Jacob Bernstein conjectured that a black hole should have a constant entropy proportional to its mass, otherwise you could violate the second law by adding mass to it. In 1974, Stephen Hawking showed that this is true, and that the constant  of proportionality is 1/4 !
+PPPS: Other than the trivial example of thermal equilibrium, there is at least one other instance of entropy "never increasing", which is within the event horizon of an isolated black hole. In 1972, Jacob Bernstein conjectured that a black hole should have a constant entropy proportional to its mass, otherwise you could violate the second law by adding mass to it. In 1974, Stephen Hawking showed that this is true, and that the constant  of proportionality is $$ \newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}} \ddfrac{1}{4}$$ !
 
 [*Crazy*, I know.][]{:target="_blank"}
 
