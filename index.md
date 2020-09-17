@@ -1,4 +1,7 @@
-
+<!-- MathJax -->
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 ___
 
 **Authors:** [Ali Kuwajerwala][]{:target="_blank"}, Cathlyn Chen <br /> 
@@ -42,10 +45,11 @@ ___
    6. [2.6. Noise / Disturbance](#26-noise--disturbance)
       1. [2.6.1. Example 4 Code](#261-example-4-code)
    7. [2.7. But you said *backward*...](#27-but-you-said-backward)
-      1. [2.7.1. The same, really?](#271-the-same-really)
-         1. [2.7.1.1. What is physics, anyways? A short detour](#2711-what-is-physics-anyways-a-short-detour)
-         2. [2.7.1.2. Back to reachability...](#2712-back-to-reachability)
-      2. [2.7.2. If they're the same, then what's the difference?](#272-if-theyre-the-same-then-whats-the-difference)
+      1. [2.7.1. Unsafe states?](#271-unsafe-states)
+      2. [2.7.2. Wait, hold on, forwards and backwards reachability are the same, really?](#272-wait-hold-on-forwards-and-backwards-reachability-are-the-same-really)
+         1. [2.7.2.1. What is physics, anyways? A short detour](#2721-what-is-physics-anyways-a-short-detour)
+         2. [2.7.2.2. Back to reachability...](#2722-back-to-reachability)
+      3. [2.7.3. If they're the same, then what's the difference?](#273-if-theyre-the-same-then-whats-the-difference)
    8. [2.8. You seem to be able compute these sets just fine. What's the problem then?](#28-you-seem-to-be-able-compute-these-sets-just-fine-whats-the-problem-then)
       1. [2.8.1. Future Plans](#281-future-plans)
    9. [2.9. What now?](#29-what-now)
@@ -283,19 +287,25 @@ That being said, most reachability problems will involve navigating some physica
 ## 2.2. In two (simple) dimensions...
 <a id="markdown-in-two-simple-dimensions..." name="in-two-simple-dimensions..."></a>
 
-Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}, a simple idealized dynamics model for a 2D car. The car can be imagined as a rigid body that moves in the **xy** plane. 
+Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}, a simple idealized dynamics model for a 2D car. The car can be imagined as a rigid body that moves in the $$xy$$ plane. 
 
-The dynamics are as follows: the car has a speed **s** and steering angle \theta 
+The dynamics are as follows:<br /> The car has a speed $$s$$ and steering angle $$\theta$$, and they can be modified directly with control inputs $$\dot{s}$$ and $$\dot{\theta}$$ to the car, respectively. It also has a location $$(x, y)$$ in the $$xy$$ plane. We're assuming that there is some reasonable maximum speed $$s_{max}$$ and maximum steering angle $$\theta_{max}$$ which then also defines a minimum turning radius $$r$$ for the car.
 
-$$mean = \frac{\displaystyle\sum_{i=1}^{n} x_{i}}{n}$$
+The *configuration* transition equation for a Dubin's Car is then: <br />
 
-\\[ \frac{1}{n^{2}} \\])
+$$ \dot{x} = s \cdot cos \theta $$ 
 
- {% raw %}
-  $$a^2 + b^2 = c^2$$ --> note that all equations between these tags will not need escaping! 
- {% endraw %}
+$$ \dot{y} = s \cdot sin \theta $$ 
 
-You can see the set of all the possible "locations" that are reachable increase as time increases. 
+$$ \dot{s} = \textrm{throttle} $$  
+
+$$ \dot{\theta} = \textrm{turning the steering wheel} $$ 
+
+The motion of the car (borrowed from Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}) looks like this, shown here in blue:
+
+![Curves](https://i.imgur.com/zzDhy3y.png)
+
+In the gif below, you can see the set of all the possible "locations" that are reachable increase as time increases. However, the circle doesn't just grow bigger. This is because the transformation of the set is restricted by the dynamics described above.  
 
 In this example, the green circle represents the set of all possible initial positions, and as time passes, the blue "circle" / shape represents the set of all points reachable by starting from somewhere in the green circle. As you can see, the blue shape grows with time. So when **t = N seconds**, the blue shape represents all the points you could possibly reach in **N seconds**, if you started somewhere within the green circle. 
 
@@ -401,9 +411,10 @@ There are two main things that determine the transformation of the reachable set
 
 The word policy here depends on context. Typically in reinforcement learning, we think of policies as a **function** mapping _perceived states of the environment_ to **actions**. It represents the agent's **strategy**. As in, given a state (a certain situation), the policy picks an action to take, typically the one that maximizes the long term reward.
 
-In reachability analysis, we are often only interested in a specific type of policy, namely the **optimal policy**, this is because reachability analysis is mainly concerned with the _possibility_ of dynamic systems reaching certain states (remember, we're talking about states in the _configuration_ space, not physical space), so all that matters is there exists *some* policy that reaches a certain state. When we're thinking about the reachability of a particular state (or set of states) **T**, we think about the *optimal policy* to go from anywhere in the set of initial states to **T**, if the optimal policy can't reach it, we know that the state is unreachable.
+In reachability analysis, we are often only interested in a specific type of policy, namely the **optimal policy** (i.e. anything the dynamics allows), this is because reachability analysis is mainly concerned with the _possibility_ of dynamic systems reaching certain states (remember, we're talking about states in the _configuration_ space, not physical space), so all that matters is there exists *some* policy that reaches a certain state. When we're thinking about the reachability of a particular state (or set of states) **T**, we think about the *optimal policy* to go from anywhere in the set of initial states to **T**, if the optimal policy can't reach it, we know that the state is unreachable.
 
- In the case of a 2D Dubin's car, this is a [bang bang policy][]{:target="_blank"}, which essentially means you go full speed in the optimal direction. It's called bang bang because it switches abruptly between (usually) two states, such as go left and go right.
+That being said it's worth noting that in RL / planning, deriving (or even computing) this "optimal policy" can be a more difficult problem than computing reachability.
+In the case of a 2D Dubin's car, this is a [bang bang policy][]{:target="_blank"}, which essentially means you go full speed in the optimal direction. It's called bang bang because it switches abruptly between (usually) two states, such as go left and go right.
 
 For the purposes of this project however, the word policy can mean either of previous definitions. Here we think of policies as **_restrictions placed on the agents movement through the configuration space_**. The restriction may be "always choose the optimal action" resulting in the optimal policy, or it could be something like "stay away from the walls", resulting in a policy that isn't a function (at least with respect to states mapping to individual actions).
 
@@ -524,14 +535,21 @@ HJIextraArgs.addGaussianNoiseStandardDeviation = [0; 0; 0.5];
 
 At this point you may be wondering **"Okay, but why is it called _backward_ reachability?"**
 
-The trivial answer is that for this project, we're focused on extrapolating backwards from unsafe states to see if we ever reach them, which grants us insights into the safety of the system in question. However there is another much deeper answer, which is that backwards and forward reachability are symmetrical concepts. So the explanations of forward reachability overlap perfectly with the explanations of backwards reachability.
+The trivial answer is that for this project, we're focused on extrapolating backwards from **unsafe states** to see if we ever reach them, which grants us insights into the safety of the system in question. However there is another much deeper answer, which is that backwards and forward reachability are symmetrical concepts. So the explanations of forward reachability overlap almost perfectly with the explanations of backwards reachability.
 
-### 2.7.1. The same, really?
-<a id="markdown-the-same%2C-really%3F" name="the-same%2C-really%3F"></a>
+### 2.7.1. Unsafe states?
+<a id="markdown-unsafe-states%3F" name="unsafe-states%3F"></a>
 
-It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it,and frankly it continues to surprise me to this day. 
+Unsafe states are really hard to define. In fact, anything related to AI / Robot Safety tends to be a pretty slippery concept. Crash states are obviously unsafe states, but so is the state right before a crash. How many states before the crash count as unsafe? A stationary car could be in an unsafe state if it's blocking another vehicle's path in a crowded intersection. 
 
-#### 2.7.1.1. What is physics, anyways? A short detour
+Determining specific criteria for unsafe sates within the configuration space of a given dynamic system is a whole other line of inquiry.
+
+### 2.7.2. Wait, hold on, forwards and backwards reachability are the same, really?
+<a id="markdown-wait%2C-hold-on%2C-forwards-and-backwards-reachability-are-the-same%2C-really%3F" name="wait%2C-hold-on%2C-forwards-and-backwards-reachability-are-the-same%2C-really%3F"></a>
+
+It is easy to miss the profundity of this statement. The fact that the dynamical laws of physics — with one small exception — seem to be [symmetrical with respect to time][]{:target="_blank"} is something that really surprised me when I first found out about it, and frankly it continues to surprise me to this day. 
+
+#### 2.7.2.1. What is physics, anyways? A short detour
 <a id="markdown-what-is-physics%2C-anyways%3F-a-short-detour" name="what-is-physics%2C-anyways%3F-a-short-detour"></a>
 
 PS: It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
@@ -544,19 +562,25 @@ PPPS: Other than the trivial example of thermal equilibrium, there is at least o
 
 [*Crazy*, I know.]: https://i.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif
 
-#### 2.7.1.2. Back to reachability...
+#### 2.7.2.2. Back to reachability...
 <a id="markdown-back-to-reachability..." name="back-to-reachability..."></a>
 
 Anyways, given that backwards reachability analysis is essentially the same as forward reachability analysis, there is a lot of potential to leverage the backwards version in solving problems regarding safety critical systems.
 
-### 2.7.2. If they're the same, then what's the difference?
+### 2.7.3. If they're the same, then what's the difference?
 <a id="markdown-if-they're-the-same%2C-then-what's-the-difference%3F" name="if-they're-the-same%2C-then-what's-the-difference%3F"></a>
 
 You can think about forward reachability as determining to *what* states in the *future* is your current policy going to take you, and whether those states are good or bad.
 
 You can think about backward reachability as: *given* a certain good or bad future state, what *previous* states would you have to cross to get there, and whether or not you should seek or avoid such states, respectively.
 
-From a computation perspective, its pretty much identical.
+From a computation perspective, backwards and forwards reachability are basically identical. The direction of each of the forces acting on the objects in the system is reversed and voila! Backwards reachability. 
+
+If you've ever played a game of UNO and prepared for the possibility of someone playing a reverse card, you've applied the same concept. When someone plays a reverse card --- for each pair of adjacent players, the recipient of the action card will now be the donor. The "forces" applied by the action cards now go in the reverse direction. If you haven't been preparing for the possibility of reverse cards while playing UNO, you really need to [step up][]{:target="_blank"} your game.
+
+![reverse](https://cdn.custom-cursor.com/cursors/pack2078.png)
+
+[step up]: https://www.unorules.com/best-strategies-to-win-uno/
 
 [symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
 
