@@ -287,6 +287,8 @@ Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"
 
 The dynamics are as follows: the car has a speed **s** and steering angle \theta 
 
+$$mean = \frac{\displaystyle\sum_{i=1}^{n} x_{i}}{n}$$
+
 \\[ \frac{1}{n^{2}} \\])
 
  {% raw %}
