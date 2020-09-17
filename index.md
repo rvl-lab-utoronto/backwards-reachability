@@ -58,7 +58,7 @@ ___
 # 1. Backwards Reachability
 <a id="markdown-backwards-reachability" name="backwards-reachability"></a>
 
-  In the context of a dynamic system, the **backwards reachable set** (BRS) describes all initial states that can reach a given target set of final states within a certain duration of time. If one can efficiently compute such sets, there is potential to use them to make safety guarantees for various autonomous systems, by determining whether some potential unsafe state will, in principle, ever be reached by a given policy. 
+  In the context of a dynamic system, the **backwards reachable set** (BRS) describes **_the set of all initial states_** from which the agent can reach a given **target set of final states** within a certain duration of time. If one can efficiently compute such sets, there is potential to use them to make safety guarantees for various autonomous systems, by determining whether some potential unsafe state will, in principle, ever be reached by a given policy. 
   
   In this tutorial, we describe the tools currently available to tackle this problem and how to use them. We also talk briefly about the different ways to think about the problem, from our own experience and time spent working on it.
 
@@ -259,7 +259,7 @@ ___
 
 This part of the tutorial is intended to serve as an informal introduction to the various concepts of reachability analysis for those unfamiliar with it. Think of it as a tour of the landscape. 
 
-A comprehensive and thorough explanation of reachability analysis, complete with the corresponding math, is currently beyond the scope o this tutorial, if you'd like to work on reachability analysis yourself, you should complement this article with the various reading material linked to in the resources section above. 
+A comprehensive and thorough explanation of reachability analysis, complete with the corresponding math, is currently beyond the scope of this tutorial, if you'd like to work on reachability analysis yourself, you should complement this article with the various reading material linked to in the resources section above. 
 
 As the RVL Lab continues to pursue projects in this area, we will update this page, and this section accordingly.
 
@@ -283,7 +283,17 @@ That being said, most reachability problems will involve navigating some physica
 ## 2.2. In two (simple) dimensions...
 <a id="markdown-in-two-simple-dimensions..." name="in-two-simple-dimensions..."></a>
 
-Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}: You can see the set of all the possible "locations" that are reachable increase as time increases. 
+Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}, a simple idealized dynamics model for a 2D car. The car can be imagined as a rigid body that moves in the **xy** plane. 
+
+The dynamics are as follows: the car has a speed **s** and steering angle \theta 
+
+\\[ \frac{1}{n^{2}} \\])
+
+ {% raw %}
+  $$a^2 + b^2 = c^2$$ --> note that all equations between these tags will not need escaping! 
+ {% endraw %}
+
+You can see the set of all the possible "locations" that are reachable increase as time increases. 
 
 In this example, the green circle represents the set of all possible initial positions, and as time passes, the blue "circle" / shape represents the set of all points reachable by starting from somewhere in the green circle. As you can see, the blue shape grows with time. So when **t = N seconds**, the blue shape represents all the points you could possibly reach in **N seconds**, if you started somewhere within the green circle. 
 
