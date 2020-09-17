@@ -34,7 +34,8 @@ ___
    1. [2.1. What is Reachability?](#21-what-is-reachability)
       1. [2.1.1. Configuration Space?](#211-configuration-space)
    2. [2.2. In two (simple) dimensions...](#22-in-two-simple-dimensions)
-      1. [2.2.1. Example 1 Code](#221-example-1-code)
+      1. [2.2.1. Dubin's Car Dynamics](#221-dubins-car-dynamics)
+      2. [2.2.2. Example 1 Code](#222-example-1-code)
    3. [2.3. Okay, but...](#23-okay-but)
       1. [2.3.1. What determines the set?](#231-what-determines-the-set)
       2. [2.3.2. What do we mean by **Policy**?](#232-what-do-we-mean-by-policy)
@@ -289,13 +290,16 @@ That being said, most reachability problems will involve navigating some physica
 
 Below is a simple geometric example involving a [Dubin's Car][]{:target="-blank"}, a simple idealized dynamics model for a 2D car. The car can be imagined as a rigid body that moves in the $$xy$$ plane. 
 
+### 2.2.1. Dubin's Car Dynamics
+<a id="markdown-dubin's-car-dynamics" name="dubin's-car-dynamics"></a>
+
 The dynamics are as follows:<br /> The car has a speed $$s$$ and steering angle $$\theta$$, and they can be modified directly with control inputs $$\dot{s}$$ and $$\dot{\theta}$$ to the car, respectively. It also has a location $$(x, y)$$ in the $$xy$$ plane. We're assuming that there is some reasonable maximum speed $$s_{max}$$ and maximum steering angle $$\theta_{max}$$ which then also defines a minimum turning radius $$r$$ for the car.
 
 The *configuration* transition equation for a Dubin's Car is then: <br />
 
-$$ \dot{x} = s \cdot cos \theta $$ 
+$$ \dot{x} = s \cdot cos (\theta) $$ 
 
-$$ \dot{y} = s \cdot sin \theta $$ 
+$$ \dot{y} = s \cdot sin (\theta) $$ 
 
 $$ \dot{s} = \textrm{throttle} $$  
 
@@ -313,9 +317,9 @@ Example 1:
 
 ![New](https://i.imgur.com/qFN3xU3.gif)
 
-You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}
+You can read more about a Dubin's Car in Steve LaValle's [Planning Algorithms textbook][]{:target="_blank"}.
 
-### 2.2.1. Example 1 Code
+### 2.2.2. Example 1 Code
 <a id="markdown-example-1-code" name="example-1-code"></a>
 
 The example above was generated using the helperOC toolbox in MATLAB. I've included the relevant bits of code, and the file itself with my changes below for educational purposes, but all the credit goes to the authors of the toolbox. You can also simply ignore the code blocks if you aren't interested in the implementation aspect as the theory doesn't depend on it.
@@ -576,18 +580,18 @@ You can think about backward reachability as: *given* a certain good or bad futu
 
 From a computation perspective, backwards and forwards reachability are basically identical. The direction of each of the forces acting on the objects in the system is reversed and voila! Backwards reachability. 
 
-If you've ever played a game of UNO and prepared for the possibility of someone playing a reverse card, you've applied the same concept. When someone plays a reverse card --- for each pair of adjacent players, the recipient of the action card will now be the donor. The "forces" applied by the action cards now go in the reverse direction. If you haven't been preparing for the possibility of reverse cards while playing UNO, you really need to [step up][]{:target="_blank"} your game.
+If you've ever played a game of UNO and prepared for the possibility of someone playing a reverse card, you've applied the same concept. When someone plays a reverse card --- for each pair of adjacent players, the recipient of the action card will now be the donor. The "forces" applied by the action cards now go in the reverse direction. If you haven't been preparing for the possibility of reverse cards while playing UNO, you really need to [step up your game][]{:target="_blank"}.
 
 ![reverse](https://cdn.custom-cursor.com/cursors/pack2078.png)
 
-[step up]: https://www.unorules.com/best-strategies-to-win-uno/
+[step up your game]: https://www.unorules.com/best-strategies-to-win-uno/
 
 [symmetrical with respect to time]: http://math.ucr.edu/home/baez/time/
 
 ## 2.8. You seem to be able compute these sets just fine. What's the problem then?
 <a id="markdown-you-seem-to-be-able-compute-these-sets-just-fine.-what's-the-problem-then%3F" name="you-seem-to-be-able-compute-these-sets-just-fine.-what's-the-problem-then%3F"></a>
 
-As I'm sure you've noticed, this tutorial deals with very simple dynamic systems. Even computing the reachable sets of a simple 2D Dubin's car involves solving a partial differential equation, known as the Hamiltonian. As the systems get more complex, so does the math.
+As I'm sure you've noticed, this tutorial deals with very simple dynamic systems. Even computing the reachable sets of a simple 2D Dubin's car involves solving a partial differential equation. This type of equation is known as the Hamiltonian. As the systems get more complex, so does the math.
 
 All the toolboxes mentioned above use a grid based system to approximate the system dynamics over a "chunk" / subset of the configuration space across time. A big problem here is that the size of the computation grows exponentially with respect to the number of dimensions, and real life dynamic systems tend to be quite high dimensional. It is impossible to compute their reachable sets within a reasonable amount of time. This is huge bottleneck since ideally we want to compute these sets in _real time_, let alone well in advance. This is known as the curse of dimensionality, and makes the problem totally infeasible at the moment for something like a real self driving car.
 
