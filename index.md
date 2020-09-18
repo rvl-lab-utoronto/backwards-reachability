@@ -18,44 +18,44 @@ ___
   
 <!-- TOC -->
 
-1. [1. Backwards Reachability](#1-backwards-reachability)
-   1. [1.1. Prerequisites](#11-prerequisites)
-   2. [1.2. Resources](#12-resources)
-   3. [1.3. Overview of Available Toolboxes](#13-overview-of-available-toolboxes)
-      1. [1.3.1. Level Set Method Toolbox](#131-level-set-method-toolbox)
-      2. [1.3.2. HelperOC Toolbox](#132-helperoc-toolbox)
-      3. [1.3.3. BEACLS](#133-beacls)
-      4. [1.3.4. Optimized DP](#134-optimized-dp)
-   4. [1.4. Toolbox Setup](#14-toolbox-setup)
-      1. [1.4.1. HelperOC toolbox (by Sylvia Herbert, Mo Chen and others) <br /> [*MATLAB* ]](#141-helperoc-toolbox-by-sylvia-herbert-mo-chen-and-others-br--matlab)
-         1. [1.4.1.1. Short FAQ:Q:](#1411-short-faqq)
-      2. [1.4.2. Optimized DP  (by Mo Chen and others) <br />  [*Python* interface, *HeteroCL* implementation ]](#142-optimized-dp-by-mo-chen-and-others-br--python-interface-heterocl-implementation)
-2. [2. Reachability Notes](#2-reachability-notes)
-   1. [2.1. What is Reachability?](#21-what-is-reachability)
-      1. [2.1.1. Configuration Space?](#211-configuration-space)
-   2. [2.2. In two (simple) dimensions...](#22-in-two-simple-dimensions)
-      1. [2.2.1. Dubin's Car Dynamics](#221-dubins-car-dynamics)
-      2. [2.2.2. Example 1 Code](#222-example-1-code)
-   3. [2.3. Okay, but...](#23-okay-but)
-      1. [2.3.1. What determines the set?](#231-what-determines-the-set)
-      2. [2.3.2. What do we mean by **Policy**?](#232-what-do-we-mean-by-policy)
-   4. [2.4. Different Policies?](#24-different-policies)
-      1. [2.4.1. Example 2 Code](#241-example-2-code)
-   5. [2.5. Different Dynamics?](#25-different-dynamics)
-      1. [2.5.1. Example 3 Code](#251-example-3-code)
-   6. [2.6. Noise / Disturbance](#26-noise--disturbance)
-      1. [2.6.1. Example 4 Code](#261-example-4-code)
-   7. [2.7. But you said *backward*...](#27-but-you-said-backward)
-      1. [2.7.1. Unsafe states?](#271-unsafe-states)
-      2. [2.7.2. Wait, hold on, forwards and backwards reachability are the same, really?](#272-wait-hold-on-forwards-and-backwards-reachability-are-the-same-really)
-         1. [2.7.2.1. What is physics, anyways? A short detour](#2721-what-is-physics-anyways-a-short-detour)
-         2. [2.7.2.2. Back to reachability...](#2722-back-to-reachability)
-      3. [2.7.3. If they're the same, then what's the difference?](#273-if-theyre-the-same-then-whats-the-difference)
-   8. [2.8. You seem to be able compute these sets just fine. What's the problem then?](#28-you-seem-to-be-able-compute-these-sets-just-fine-whats-the-problem-then)
-      1. [2.8.1. Future Plans](#281-future-plans)
-   9. [2.9. What now?](#29-what-now)
-   10. [2.10. Real Life Applications](#210-real-life-applications)
-3. [3. Conclusion](#3-conclusion)
+- [1. Backwards Reachability](#1-backwards-reachability)
+    - [1.1. Prerequisites](#11-prerequisites)
+    - [1.2. Resources](#12-resources)
+    - [1.3. Overview of Available Toolboxes](#13-overview-of-available-toolboxes)
+        - [1.3.1. Level Set Method Toolbox](#131-level-set-method-toolbox)
+        - [1.3.2. HelperOC Toolbox](#132-helperoc-toolbox)
+        - [1.3.3. BEACLS](#133-beacls)
+        - [1.3.4. Optimized DP](#134-optimized-dp)
+    - [1.4. Toolbox Setup](#14-toolbox-setup)
+        - [1.4.1. HelperOC toolbox by Sylvia Herbert, Mo Chen and others <br /> [*MATLAB* ]](#141-helperoc-toolbox-by-sylvia-herbert-mo-chen-and-others-br--matlab-)
+            - [1.4.1.1. Short FAQ:Q:](#1411-short-faqq)
+        - [1.4.2. Optimized DP  by Mo Chen and others <br />  [*Python* interface, *HeteroCL* implementation ]](#142-optimized-dp--by-mo-chen-and-others-br---python-interface-heterocl-implementation-)
+- [2. Reachability Notes](#2-reachability-notes)
+    - [2.1. What is Reachability?](#21-what-is-reachability)
+        - [2.1.1. Configuration Space?](#211-configuration-space)
+    - [2.2. In two simple dimensions...](#22-in-two-simple-dimensions)
+        - [2.2.1. Dubin's Car Dynamics](#221-dubins-car-dynamics)
+        - [2.2.2. Example 1 Code](#222-example-1-code)
+    - [2.3. Okay, but...](#23-okay-but)
+        - [2.3.1. What determines the set?](#231-what-determines-the-set)
+        - [2.3.2. What do we mean by **Policy**?](#232-what-do-we-mean-by-policy)
+    - [2.4. Different Policies?](#24-different-policies)
+        - [2.4.1. Example 2 Code](#241-example-2-code)
+    - [2.5. Different Dynamics?](#25-different-dynamics)
+        - [2.5.1. Example 3 Code](#251-example-3-code)
+    - [2.6. Noise / Disturbance](#26-noise--disturbance)
+        - [2.6.1. Example 4 Code](#261-example-4-code)
+    - [2.7. But you said *backward*...](#27-but-you-said-backward)
+        - [2.7.1. Unsafe states?](#271-unsafe-states)
+        - [2.7.2. Wait, hold on, forwards and backwards reachability are the same, really?](#272-wait-hold-on-forwards-and-backwards-reachability-are-the-same-really)
+            - [2.7.2.1. What is physics, anyways? A short detour](#2721-what-is-physics-anyways-a-short-detour)
+            - [2.7.2.2. Back to reachability...](#2722-back-to-reachability)
+        - [2.7.3. If they're the same, then what's the difference?](#273-if-theyre-the-same-then-whats-the-difference)
+    - [2.8. You seem to be able compute these sets just fine. What's the problem then?](#28-you-seem-to-be-able-compute-these-sets-just-fine-whats-the-problem-then)
+        - [2.8.1. Future Plans](#281-future-plans)
+    - [2.9. What now?](#29-what-now)
+    - [2.10. Real Life Applications](#210-real-life-applications)
+- [3. Conclusion](#3-conclusion)
 
 <!-- /TOC -->
 ___
@@ -264,7 +264,7 @@ ___
 
 This part of the tutorial is intended to serve as an informal introduction to the various concepts of reachability analysis for those unfamiliar with it. Think of it as a tour of the landscape. 
 
-A comprehensive and thorough explanation of reachability analysis, complete with the corresponding math, is currently beyond the scope of this tutorial, if you'd like to work on reachability analysis yourself, you should complement this article with the various reading material linked to in the resources section above. 
+A comprehensive and thorough explanation of reachability analysis ---complete with the corresponding math--- is currently beyond the scope of this tutorial, and if you'd like to work on reachability analysis yourself you should complement this article with the various reading material linked to in the [resources](#12-resources) section above. 
 
 As the RVL Lab continues to pursue projects in this area, we will update this page, and this section accordingly.
 
@@ -280,6 +280,9 @@ Reachability formalizes the idea of
 
 A mistake I made when first trying to understand this was that I thought about this purely geometrically. As in, only thinking about location, and not _configuration_. A good counterexample is to think of the reachability sets of Rubik's cube configurations. Here the set is discrete, discontinuous and it doesn't make sense to describe it with Euclidean space. Yet you can still perform reachability analysis on it.
 
+For example, the questions "Given a certain Rubik's cube configuration, what _other configurations_ can you reach in one move / two moves / three moves ?" can each be answered with a corresponding **set of Rubik's cube _configurations_.**
+
+**PS:** The reachable set for 'one move' is a subset of the reachable set for 'three moves' but _not_ a subset of the reachable set for 'two moves'!
 
 ![Rubiks](https://media.giphy.com/media/kFuavIYvRQZGg/giphy.gif)
 
@@ -556,11 +559,11 @@ It is easy to miss the profundity of this statement. The fact that the dynamical
 #### 2.7.2.1. What is physics, anyways? A short detour
 <a id="markdown-what-is-physics%2C-anyways%3F-a-short-detour" name="what-is-physics%2C-anyways%3F-a-short-detour"></a>
 
-PS: It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
+**PS:** It's also important to remember that time is simply how we measure causality, and doesn't exist in any meaningful way *in and of itself*. 
 
-PPS: It is also a common misconception that the second law of thermodynamics states that entropy must always increase overtime. It actually states only that, in an isolated system, entropy can never decrease over time. For example entropy is constant once a system reaches thermal equilibrium.
+**PPS:** It is also a common misconception that the second law of thermodynamics states that entropy must always increase overtime. It actually states only that, in an isolated system, entropy can never decrease over time. For example, entropy is constant once a system reaches thermal equilibrium.
 
-PPPS: Other than the trivial example of thermal equilibrium, there is at least one other instance of entropy "never increasing", which is within the event horizon of an isolated black hole. In 1972, Jacob Bernstein conjectured that a black hole should have a constant entropy proportional to its mass, otherwise you could violate the second law by adding mass to it. In 1974, Stephen Hawking showed that this is true, and that the constant  of proportionality is $$ \newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}} \ddfrac{1}{4}$$ !
+**PPPS:** Other than the trivial example of thermal equilibrium, there is at least one other instance of entropy "never increasing", which is within the event horizon of an isolated black hole. In 1972, Jacob Bernstein conjectured that a black hole should have a constant entropy proportional to its mass, since otherwise you could violate the second law by adding mass to it. In 1974, Stephen Hawking showed that this is true, and that the constant  of proportionality is $$ \newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}} \ddfrac{1}{4}$$ !
 
 [*Crazy*, I know.][]{:target="_blank"}
 
@@ -580,7 +583,7 @@ You can think about backward reachability as: *given* a certain good or bad futu
 
 From a computation perspective, backwards and forwards reachability are basically identical. The direction of each of the forces acting on the objects in the system is reversed and voila! Backwards reachability. 
 
-If you've ever played a game of UNO and prepared for the possibility of someone playing a reverse card, you've applied the same concept. When someone plays a reverse card --- for each pair of adjacent players, the recipient of the action card will now be the donor. The "forces" applied by the action cards now go in the reverse direction. If you haven't been preparing for the possibility of reverse cards while playing UNO, you really need to [step up your game][]{:target="_blank"}.
+If you've ever played a game of UNO and prepared for the possibility of someone playing a reverse card, you've applied the same concept. When someone plays a reverse card --- for each pair of adjacent players --- the recipient of the action card will now be the donor. The "forces" applied by the action cards now go in the reverse direction. If you haven't been preparing for the possibility of reverse cards while playing UNO, you really need to [step up your game][]{:target="_blank"}.
 
 ![reverse](https://cdn.custom-cursor.com/cursors/pack2078.png)
 
