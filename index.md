@@ -296,7 +296,7 @@ Below is a straightforward geometric example involving a [Dubin's Car][]{:target
 ### 2.2.1. Dubin's Car Dynamics
 <a id="markdown-dubin's-car-dynamics" name="dubin's-car-dynamics"></a>
 
-The dynamics are as follows:<br /> The car has a speed $$s$$ and steering angle $$\theta$$, and they can be modified directly with control inputs $$\dot{s}$$ and $$\dot{\theta}$$ to the car, respectively. It also has a location $$(x, y)$$ in the $$xy$$ plane. We're assuming that there is some reasonable maximum speed $$s_{max}$$ and maximum steering angle $$\theta_{max}$$ which then also defines a minimum turning radius $$r$$ for the car.
+The dynamics are as follows:<br /> The car has a speed $$s$$ and steering angle $$\theta$$, and they can be modified directly with control inputs $$\dot{s}$$ and $$\dot{\theta}$$ to the car, respectively. It also has a location $$(x, y)$$ in the $$xy$$ plane. We're assuming that there is some reasonable maximum speed $$s_{max}$$ and maximum steering angle $$\theta_{max}$$ which then consequently also defines a minimum turning radius $$r$$ for the car.
 
 The *configuration* transition equation for a Dubin's Car is then: <br />
 
